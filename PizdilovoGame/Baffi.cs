@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PizdilovoGame.Rassi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,6 +54,11 @@ namespace PizdilovoGame
                     }
 
             }
+        }
+
+        internal void Buffs(Player player, IPlayer enemy)
+        {
+            throw new NotImplementedException();
         }
     }
 }

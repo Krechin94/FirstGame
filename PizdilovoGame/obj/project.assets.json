@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\79111\\Desktop\\development\\PizdilovoGame\\PizdilovoGame\\PizdilovoGame.csproj",
+      "projectUniqueName": "C:\\Users\\79111\\Desktop\\Git\\FirstGame\\PizdilovoGame\\PizdilovoGame.csproj",
       "projectName": "PizdilovoGame",
-      "projectPath": "C:\\Users\\79111\\Desktop\\development\\PizdilovoGame\\PizdilovoGame\\PizdilovoGame.csproj",
+      "projectPath": "C:\\Users\\79111\\Desktop\\Git\\FirstGame\\PizdilovoGame\\PizdilovoGame.csproj",
       "packagesPath": "C:\\Users\\79111\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\79111\\Desktop\\development\\PizdilovoGame\\PizdilovoGame\\obj\\",
+      "outputPath": "C:\\Users\\79111\\Desktop\\Git\\FirstGame\\PizdilovoGame\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\79111\\AppData\\Roaming\\NuGet\\NuGet.Config",
