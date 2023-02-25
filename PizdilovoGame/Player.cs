@@ -38,7 +38,19 @@ namespace PizdilovoGame
                 
                     Baffi buf = new Baffi();
                     Console.WriteLine("Куда бить 1 - голова, 2 - туловище, 3 - ноги");
-                    int kuda = int.Parse(Console.ReadLine());
+                int kuda = -1;
+                do
+                {
+                    try
+                    {
+                        kuda = int.Parse(Console.ReadLine());
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Попробуй все-таки ввести от 1 до 3");
+                    }
+                }
+                while (kuda != 1 && kuda != 2 && kuda != 3);
                     Console.WriteLine(this.Name + " " + this.HP);
                     switch (kuda)
                     {
@@ -77,7 +89,7 @@ namespace PizdilovoGame
                                 break;
                             }
                     }
-                    int buff = random.Next(0, 4);
+                    /*int buff = random.Next(0, 4);
                     if (buff == 0)
                     {
                         buf.Buffs(this, enemy);
@@ -86,7 +98,7 @@ namespace PizdilovoGame
                     else
                     {
                         Console.WriteLine("Без баффов");
-                    }
+                    }*/
                    
 
 

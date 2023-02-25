@@ -56,9 +56,9 @@ namespace PizdilovoGame
             }
         }
 
-        internal void Buffs(Player player, IPlayer enemy)
+        /*internal void Buffs(Player player, IPlayer enemy)
         {
             throw new NotImplementedException();
-        }
+        }*/
     }
 }
