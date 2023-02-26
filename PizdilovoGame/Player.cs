@@ -18,7 +18,7 @@ namespace PizdilovoGame
         
         public string Nation { get; set; }
 
-
+        VvodChisla vvodChisla = new VvodChisla();
 
         private IWeapon _currentWeapon;
 
@@ -38,19 +38,9 @@ namespace PizdilovoGame
                 
                     Baffi buf = new Baffi();
                     Console.WriteLine("Куда бить 1 - голова, 2 - туловище, 3 - ноги");
-                int kuda = -1;
-                do
-                {
-                    try
-                    {
-                        kuda = int.Parse(Console.ReadLine());
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("Попробуй все-таки ввести от 1 до 3");
-                    }
-                }
-                while (kuda != 1 && kuda != 2 && kuda != 3);
+                int kuda= -1;
+                vvodChisla.Vvod();
+                kuda = vvodChisla.vvod;
                     Console.WriteLine(this.Name + " " + this.HP);
                     switch (kuda)
                     {
@@ -83,11 +73,7 @@ namespace PizdilovoGame
                                 }
                                 break;
                             }
-                        default:
-                            {
-                                Console.WriteLine("Какой же ты тупой, я же написал от 1 до 3, это 1 или 2 или 3!!!!!!!");
-                                break;
-                            }
+                      
                     }
                     /*int buff = random.Next(0, 4);
                     if (buff == 0)

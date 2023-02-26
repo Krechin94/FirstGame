@@ -7,7 +7,9 @@ namespace PizdilovoGame
     internal class Program
     {
         static Random random = new Random();
+       
         static void Main(string[] args)
+             
         {
             Console.WriteLine("Добро пожаловать в игру");
             Console.WriteLine("Суть игры дать другому по ебалу");
@@ -15,11 +17,13 @@ namespace PizdilovoGame
             int kolichestvo;
             kolichestvo = 2;
             IPlayer[] players = new IPlayer[kolichestvo];
-
+            VvodChisla vvodChisla = new VvodChisla();
             for (int i = 0; i < kolichestvo; i++)
             {
                 Console.WriteLine("Выберите персонажа \n Elf - 1 \n Ork -2 \n Human - 3");
-                int personazh = int.Parse(Console.ReadLine());
+                
+                vvodChisla.Vvod();
+                int personazh = vvodChisla.vvod;
                 switch (personazh)
                 {
                     case 1:
@@ -95,7 +99,10 @@ namespace PizdilovoGame
         public static IWeapon ChooseWeapon()
         {
             Console.WriteLine("Выберите оружие \n Axe - 1 \n Sword -2 \n Shield - 3");
-            int personazh = int.Parse(Console.ReadLine());
+            VvodChisla vvodChisla = new VvodChisla();
+            vvodChisla.Vvod();
+
+            int personazh = vvodChisla.vvod;
 
             IWeapon chosenWeapon;
             switch (personazh)
