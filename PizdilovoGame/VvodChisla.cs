@@ -1,21 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace PizdilovoGame
 {
     internal class VvodChisla
     {
-        public int chislo;
-        public int vvod;
+        public int Chislo;
+        public int Number;
         public void Vvod()
         {
-         chislo = int.Parse(Console.ReadLine());
-          if (chislo != 1 && chislo != 2 && chislo !=3 )
-              throw new MyException();
-            vvod = chislo;
+            try
+            {
+
+                Chislo = int.Parse(Console.ReadLine());
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine(exp.Message);
+                if (Chislo != 1 && Chislo != 2 && Chislo != 3)
+                    throw new WrongUserInputException();
+                return;
+            }        
+            Number = Chislo;
         }
        
     }

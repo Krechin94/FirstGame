@@ -1,10 +1,6 @@
 ﻿using PizdilovoGame.Rassi;
 using PizdilovoGame.Weapons;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PizdilovoGame
 {
@@ -23,7 +19,7 @@ namespace PizdilovoGame
         private IWeapon _currentWeapon;
 
         public void Udar(IPlayer enemy)
-        {
+        {                      
             if (_currentWeapon == null)
             {
                 enemy.HP--;
@@ -40,7 +36,7 @@ namespace PizdilovoGame
                     Console.WriteLine("Куда бить 1 - голова, 2 - туловище, 3 - ноги");
                 int kuda= -1;
                 vvodChisla.Vvod();
-                kuda = vvodChisla.vvod;
+                kuda = vvodChisla.Number;
                     Console.WriteLine(this.Name + " " + this.HP);
                     switch (kuda)
                     {
@@ -72,24 +68,8 @@ namespace PizdilovoGame
                                     
                                 }
                                 break;
-                            }
-                      
-                    }
-                    /*int buff = random.Next(0, 4);
-                    if (buff == 0)
-                    {
-                        buf.Buffs(this, enemy);
-                   
-                    }
-                    else
-                    {
-                        Console.WriteLine("Без баффов");
-                    }*/
-                   
-
-
-               
-
+                            }                      
+                    }                                                  
             }
         }
 

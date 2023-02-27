@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace PizdilovoGame
 {
-    internal class MyException:Exception
+    public class WrongUserInputException:Exception
     {
-        public MyException() : base("Пожалуйста введи число от 1 до 3Не надо вводить буквы" )
-        { }
+        public WrongUserInputException() : base("Пожалуйста введи число от 1 до 3 \n Не надо вводить буквы" )
+        { 
+
+        }
     }
 }
