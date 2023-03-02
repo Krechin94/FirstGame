@@ -29,11 +29,9 @@ namespace PizdilovoGame
             {
                 enemy.HP = enemy.HP - _currentWeapon.Uron;
                 this.Stamina = this.Stamina - _currentWeapon.Cost;
-                Console.WriteLine($"{Name} нанес {_currentWeapon.Uron} урона. У {enemy.Name} осталось {enemy.HP} хп");
-                
-                
-                    Baffi buf = new Baffi();
-                    Console.WriteLine("Куда бить 1 - голова, 2 - туловище, 3 - ноги");
+                Console.WriteLine($"{Name} нанес {_currentWeapon.Uron} урона. У {enemy.Name} осталось {enemy.HP} хп");                
+                Baffi buf = new Baffi();
+                Console.WriteLine("Куда бить 1 - голова, 2 - туловище, 3 - ноги");
                 int kuda= -1;
                 vvodChisla.Vvod();
                 kuda = vvodChisla.Number;
@@ -64,8 +62,7 @@ namespace PizdilovoGame
                                 if (d == 0)
                                 {
                                 Console.WriteLine("TEBE POVEZLO");
-                                this.Udar(enemy);
-                                    
+                                this.Udar(enemy);                                    
                                 }
                                 break;
                             }                      
