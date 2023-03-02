@@ -19,50 +19,53 @@ namespace PizdilovoGame
                 int kolichestvo;
                 kolichestvo = 2;
                 IPlayer[] players = new IPlayer[kolichestvo];
-                VvodChisla vvodChisla = new VvodChisla();
+                VvodChisla vvodChisla = new VvodChisla();                
                 for (int i = 0; i < kolichestvo; i++)
                 {
                     Console.WriteLine("Выберите персонажа \n Elf - 1 \n Ork -2 \n Human - 3");
-
-                    vvodChisla.Vvod();
+                    vvodChisla.Vvod();                    
                     int personazh = vvodChisla.Number;
-                    switch (personazh)
+                    if (vvodChisla.Number != 1 && vvodChisla.Number != 2 && vvodChisla.Number != 3)
                     {
-                        case 1:
-                            {
-                                IPlayer elf = new Elf();
-
-                                Console.WriteLine("Введите имя");
-                                elf.Name = Console.ReadLine();
-                                elf.Equip(ChooseWeapon());
-
-                                players[i] = elf;
-                                break;
-                            }
-                        case 2:
-                            {
-                                IPlayer ork = new Ork();
-
-                                Console.WriteLine("Введите имя");
-                                ork.Name = Console.ReadLine();
-                                ork.Equip(ChooseWeapon());
-
-                                players[i] = ork;
-                                break;
-                            }
-                        case 3:
-                            {
-                                IPlayer human = new Human();
-
-                                Console.WriteLine("Введите имя");
-                                human.Name = Console.ReadLine();
-                                human.Equip(ChooseWeapon());
-
-                                players[i] = human;
-                                break;
-                            }
+                        throw new NullInputException();
                     }
+                    else
+                    {
+                        switch (personazh)
+                        {
+                            case 1:
+                                {
+                                    IPlayer elf = new Elf();
 
+                                    Console.WriteLine("Введите имя");
+                                    elf.Name = Console.ReadLine();
+                                    elf.Equip(ChooseWeapon());
+                                    players[i] = elf;
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    IPlayer ork = new Ork();
+
+                                    Console.WriteLine("Введите имя");
+                                    ork.Name = Console.ReadLine();
+                                    ork.Equip(ChooseWeapon());
+                                    players[i] = ork;
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    IPlayer human = new Human();
+
+                                    Console.WriteLine("Введите имя");
+                                    human.Name = Console.ReadLine();
+                                    human.Equip(ChooseWeapon());
+
+                                    players[i] = human;
+                                    break;
+                                }
+                        }
+                    }
                     Console.Clear();
                 }
 
@@ -71,8 +74,8 @@ namespace PizdilovoGame
 
                 Console.WriteLine("Драка сегодня будет между");
                 foreach (IPlayer player in players)
-                {
-                    Console.WriteLine(player.ToString());
+                {                                      
+                        Console.WriteLine(player.ToString());
                 }
                 Console.WriteLine("Кто проиграет тот лох");
 
@@ -96,7 +99,6 @@ namespace PizdilovoGame
                 {
                     Console.WriteLine($"Выиграл {anotherChamp} c {anotherChamp.HP} хп");
                 }
-
             }
             catch (Exception ex)
             {
@@ -106,8 +108,7 @@ namespace PizdilovoGame
                 {
                     sw.WriteLine("ошибка нахуй");
                     sw.WriteLine(ex.Message);
-                }
-                return;
+                }               
             }
          }
            public static IWeapon ChooseWeapon()
