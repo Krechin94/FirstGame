@@ -1,6 +1,7 @@
 ﻿using PizdilovoGame.Weapons;
 using PizdilovoGame.Rassi;
 using System;
+using System.IO;
 
 namespace PizdilovoGame
 {
@@ -100,6 +101,12 @@ namespace PizdilovoGame
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                
+                using (var sw = new StreamWriter("C:\\Users\\79111\\Desktop\\Git\\Log.txt"))
+                {
+                    sw.WriteLine("ошибка нахуй");
+                    sw.WriteLine(ex.Message);
+                }
                 return;
             }
          }
