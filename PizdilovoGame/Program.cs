@@ -25,47 +25,42 @@ namespace PizdilovoGame
                     Console.WriteLine("Выберите персонажа \n Elf - 1 \n Ork -2 \n Human - 3");
                     vvodChisla.Vvod();                    
                     int personazh = vvodChisla.Number;
-                    if (vvodChisla.Number != 1 && vvodChisla.Number != 2 && vvodChisla.Number != 3)
+                                       
+                    switch (personazh)
                     {
-                        throw new NullInputException();
+                        case 1:
+                            {
+                                IPlayer elf = new Elf();
+
+                                Console.WriteLine("Введите имя");
+                                elf.Name = Console.ReadLine();
+                                elf.Equip(ChooseWeapon());
+                                players[i] = elf;
+                                break;
+                            }
+                        case 2:
+                            {
+                                IPlayer ork = new Ork();
+
+                                Console.WriteLine("Введите имя");
+                                ork.Name = Console.ReadLine();
+                                ork.Equip(ChooseWeapon());
+                                players[i] = ork;
+                                break;
+                            }
+                        case 3:
+                            {
+                                IPlayer human = new Human();
+
+                                Console.WriteLine("Введите имя");
+                                human.Name = Console.ReadLine();
+                                human.Equip(ChooseWeapon());
+
+                                players[i] = human;
+                                break;
+                            }
                     }
-                    else
-                    {
-                        switch (personazh)
-                        {
-                            case 1:
-                                {
-                                    IPlayer elf = new Elf();
-
-                                    Console.WriteLine("Введите имя");
-                                    elf.Name = Console.ReadLine();
-                                    elf.Equip(ChooseWeapon());
-                                    players[i] = elf;
-                                    break;
-                                }
-                            case 2:
-                                {
-                                    IPlayer ork = new Ork();
-
-                                    Console.WriteLine("Введите имя");
-                                    ork.Name = Console.ReadLine();
-                                    ork.Equip(ChooseWeapon());
-                                    players[i] = ork;
-                                    break;
-                                }
-                            case 3:
-                                {
-                                    IPlayer human = new Human();
-
-                                    Console.WriteLine("Введите имя");
-                                    human.Name = Console.ReadLine();
-                                    human.Equip(ChooseWeapon());
-
-                                    players[i] = human;
-                                    break;
-                                }
-                        }
-                    }
+                    
                     Console.Clear();
                 }
 
