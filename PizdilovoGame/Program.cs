@@ -98,11 +98,12 @@ namespace PizdilovoGame
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                
-                using (var sw = new StreamWriter("C:\\Users\\79111\\Desktop\\Git\\Log.txt"))
+                string pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                using (var sw = new StreamWriter($"{pathToAppData}\\Log.txt", true))
                 {
                     sw.WriteLine("ошибка нахуй");
                     sw.WriteLine(ex.Message);
+                    sw.WriteLine(ex.StackTrace);
                 }               
             }
          }

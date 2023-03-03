@@ -22,10 +22,22 @@ namespace PizdilovoGame
                 catch (FormatException ex)
                 {
                     Console.WriteLine("Не вводи буквы попробуй ввести еще раз");
+                    string pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                    using (var sw = new StreamWriter($"{pathToAppData}\\Log.txt", true))
+                    {
+                        sw.WriteLine("ошибка нахуй");
+                        sw.WriteLine(ex.Message);
+                    }
                 }
                 catch (WrongUserInputException wuie)
                 {
-                    Console.WriteLine(wuie.Message + " Попробуй ввести еще раз");
+                    Console.WriteLine(wuie.Message + "\nПопробуй ввести еще раз");
+                    string pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                    using (var sw = new StreamWriter($"{pathToAppData}\\Log.txt", true))
+                    {
+                        sw.WriteLine("ошибка нахуй");
+                        sw.WriteLine(wuie.Message);
+                    }
                 }
 
             }
