@@ -9,19 +9,29 @@ namespace PizdilovoGame
         public int Number;
         public void Vvod()
         {
-            try
+            do
             {
-                Chislo = int.Parse(Console.ReadLine());
-                if (Chislo != 1 && Chislo != 2 && Chislo != 3)
+                try
                 {
-                    throw new WrongUserInputException();
+                    Chislo = int.Parse(Console.ReadLine());
+                   if (Chislo != 1 && Chislo != 2 && Chislo != 2)
+                    {
+                        throw new WrongUserInputException();
+                    }
                 }
+                catch (FormatException ex)
+                {
+                    Console.WriteLine("Не вводи буквы попробуй ввести еще раз");
+                }
+                catch (WrongUserInputException wuie)
+                {
+                    Console.WriteLine(wuie.Message + " Попробуй ввести еще раз");
+                }
+
             }
-            catch (FormatException ex)
-            {
-                Console.WriteLine(ex.Message + "вводи от 1 до 4");
-            }
-            Number = Chislo;
+            while (Chislo != 1 && Chislo != 2 && Chislo != 3);
+
+             Number = Chislo;
         }
        
     }
