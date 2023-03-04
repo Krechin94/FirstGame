@@ -11,6 +11,7 @@ namespace PizdilovoGame
        
         static void Main(string[] args)             
         {
+            DateTime dateTime = DateTime.Now;
             try
             {
                 Console.WriteLine("Добро пожаловать в игру");
@@ -102,6 +103,7 @@ namespace PizdilovoGame
                 using (var sw = new StreamWriter($"{pathToAppData}\\Log.txt", true))
                 {
                     sw.WriteLine("ошибка нахуй");
+                    sw.WriteLine(dateTime);
                     sw.WriteLine(ex.Message);
                     sw.WriteLine(ex.StackTrace);
                 }               

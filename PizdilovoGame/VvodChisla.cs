@@ -11,6 +11,7 @@ namespace PizdilovoGame
         {
             do
             {
+               DateTime dateTime = DateTime.Now;
                 try
                 {
                     Chislo = int.Parse(Console.ReadLine());
@@ -26,6 +27,7 @@ namespace PizdilovoGame
                     using (var sw = new StreamWriter($"{pathToAppData}\\Log.txt", true))
                     {
                         sw.WriteLine("ошибка нахуй");
+                        sw.WriteLine(dateTime);
                         sw.WriteLine(ex.Message);
                     }
                 }
@@ -36,6 +38,7 @@ namespace PizdilovoGame
                     using (var sw = new StreamWriter($"{pathToAppData}\\Log.txt", true))
                     {
                         sw.WriteLine("ошибка нахуй");
+                        sw.WriteLine(dateTime);
                         sw.WriteLine(wuie.Message);
                     }
                 }
