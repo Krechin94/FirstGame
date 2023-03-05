@@ -24,12 +24,12 @@ namespace PizdilovoGame
                 catch (FormatException ex)
                 {
                     Console.WriteLine("Не вводи буквы попробуй ввести еще раз"); 
-                    workWithFileLogic.WritingFile(ex.Message);
+                    workWithFileLogic.WritingFile(ex.Message, ex.StackTrace);
                 }
                 catch (WrongUserInputException wuie)
                 {
                     Console.WriteLine(wuie.Message + "\nПопробуй ввести еще раз");
-                    workWithFileLogic.WritingFile(wuie.Message);
+                    workWithFileLogic.WritingFile(wuie.Message, wuie.StackTrace);
                 }
 
             }

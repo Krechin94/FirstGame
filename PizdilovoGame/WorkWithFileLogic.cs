@@ -5,14 +5,14 @@ namespace PizdilovoGame
 {
     internal class WorkWithFileLogic
     {
-        public void WritingFile(string exceptionMessage)
+        public void WritingFile(string exceptionMessage,string placeOfException)
         {
             string pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             using (var sw = new StreamWriter($"{pathToAppData}\\PizdilovoGame\\Log.txt", true))
             {
                 sw.WriteLine("ошибка нахуй");
                 sw.WriteLine(DateTime.Now);
-                sw.WriteLine(exceptionMessage);
+                sw.WriteLine(exceptionMessage + "\n" + placeOfException);
             }
         }
 

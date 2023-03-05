@@ -98,7 +98,7 @@ namespace PizdilovoGame
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                workWithFileLogic.WritingFile(ex.Message);
+                workWithFileLogic.WritingFile(ex.Message, ex.StackTrace);
             }
          }
            public static IWeapon ChooseWeapon()
