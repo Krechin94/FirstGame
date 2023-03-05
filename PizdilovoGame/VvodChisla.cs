@@ -7,6 +7,7 @@ namespace PizdilovoGame
     {
         public int Chislo;
         public int Number;
+        WorkWithFileLogic workWithFileLogic = new WorkWithFileLogic();
         public void Vvod()
         {
             do
@@ -22,25 +23,13 @@ namespace PizdilovoGame
                 }
                 catch (FormatException ex)
                 {
-                    Console.WriteLine("Не вводи буквы попробуй ввести еще раз");
-                    string pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                    using (var sw = new StreamWriter($"{pathToAppData}\\Log.txt", true))
-                    {
-                        sw.WriteLine("ошибка нахуй");
-                        sw.WriteLine(dateTime);
-                        sw.WriteLine(ex.Message);
-                    }
+                    Console.WriteLine("Не вводи буквы попробуй ввести еще раз"); 
+                    workWithFileLogic.WritingFile(ex.Message);
                 }
                 catch (WrongUserInputException wuie)
                 {
                     Console.WriteLine(wuie.Message + "\nПопробуй ввести еще раз");
-                    string pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                    using (var sw = new StreamWriter($"{pathToAppData}\\Log.txt", true))
-                    {
-                        sw.WriteLine("ошибка нахуй");
-                        sw.WriteLine(dateTime);
-                        sw.WriteLine(wuie.Message);
-                    }
+                    workWithFileLogic.WritingFile(wuie.Message);
                 }
 
             }

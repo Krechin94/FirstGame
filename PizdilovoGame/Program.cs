@@ -8,10 +8,10 @@ namespace PizdilovoGame
     internal class Program
     {
         static Random random = new Random();
-       
         static void Main(string[] args)             
         {
-            DateTime dateTime = DateTime.Now;
+            WorkWithFileLogic workWithFileLogic = new WorkWithFileLogic();
+            workWithFileLogic.CheckingAndCreatingDirectory();
             try
             {
                 Console.WriteLine("Добро пожаловать в игру");
@@ -67,7 +67,6 @@ namespace PizdilovoGame
 
                 Console.Clear();
 
-
                 Console.WriteLine("Драка сегодня будет между");
                 foreach (IPlayer player in players)
                 {                                      
@@ -99,14 +98,7 @@ namespace PizdilovoGame
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                string pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                using (var sw = new StreamWriter($"{pathToAppData}\\Log.txt", true))
-                {
-                    sw.WriteLine("ошибка нахуй");
-                    sw.WriteLine(dateTime);
-                    sw.WriteLine(ex.Message);
-                    sw.WriteLine(ex.StackTrace);
-                }               
+                workWithFileLogic.WritingFile(ex.Message);
             }
          }
            public static IWeapon ChooseWeapon()
