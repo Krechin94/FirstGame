@@ -1,7 +1,7 @@
 ﻿using PizdilovoGame.Weapons;
 using PizdilovoGame.Rassi;
 using System;
-using System.IO;
+using PizdilovoGame.GameLogic;
 
 namespace PizdilovoGame
 {
