@@ -1,6 +1,0 @@
-C:\Users\79111\Desktop\PizdilovoGame.pdb
-C:\Users\79111\Desktop\clrcompression.dll
-C:\Users\79111\Desktop\clrjit.dll
-C:\Users\79111\Desktop\coreclr.dll
-C:\Users\79111\Desktop\mscordaccore.dll
-C:\Users\79111\Desktop\PizdilovoGame.exe
