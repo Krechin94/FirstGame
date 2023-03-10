@@ -9,7 +9,6 @@ namespace PizdilovoGame.GameLogic
         int raznitsahp;
         int raznitsaName;
         int raznitsaMana;
-        string probel = " ";
         string[] arrayProbel = new string[10] { "", " ", "  ", "   ", "    ","     ","      ", "       ", "        ", "         " };
         public void PlayerInfo(IPlayer player1, IPlayer player2)
         {
