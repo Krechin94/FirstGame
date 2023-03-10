@@ -26,15 +26,9 @@ namespace PizdilovoGame
             }
             else
             {
-                enemy.HP = enemy.HP - _currentWeapon.Uron;
-                this.Stamina = this.Stamina - _currentWeapon.Cost;
-                Console.WriteLine($"{Name} нанес {_currentWeapon.Uron} урона. У {enemy.Name} осталось {enemy.HP} хп");
-                
+                Console.WriteLine($"Сейчас бьет {Name}");
                 Console.WriteLine("Куда бить 1 - голова, 2 - туловище, 3 - ноги");
                 _vvodChisla.Vvod();
-
-                Console.WriteLine(this.Name + " " + this.HP);
-
                 var kuda = _vvodChisla.Number;
                 switch (kuda)
                 {
@@ -64,18 +58,13 @@ namespace PizdilovoGame
                             }
                             break;
                         }                      
-                }                                                  
+                }
             }
         }
 
         public void Equip(IWeapon weapon)
         {
             _currentWeapon = weapon;
-        }
-
-        public override string ToString()
-        {
-            return $" {Name} Nation: {Nation}  Stamina: {Stamina} HP: {HP} Weapon: {_currentWeapon}";
         }
     }
 }
