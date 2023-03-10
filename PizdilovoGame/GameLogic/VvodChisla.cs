@@ -17,7 +17,7 @@ namespace PizdilovoGame.GameLogic
                 try
                 {
                     Chislo = int.Parse(Console.ReadLine());
-                    if (Chislo != 1 && Chislo != 2 && Chislo != 2)
+                    if (Chislo != 1 && Chislo != 2 && Chislo != 3)
                     {
                         throw new WrongUserInputException();
                     }
