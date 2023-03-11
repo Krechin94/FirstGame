@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
 
-namespace PizdilovoGame
+namespace PizdilovoGame.GameLogic
 {
     internal class WorkWithFileLogic
     {
-        public void WritingFile(string exceptionMessage,string placeOfException)
+        public void WritingFile(string exceptionMessage, string placeOfException)
         {
             string pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             using (var sw = new StreamWriter($"{pathToAppData}\\PizdilovoGame\\Log.txt", true))
