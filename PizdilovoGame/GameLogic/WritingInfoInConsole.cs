@@ -59,6 +59,7 @@ namespace PizdilovoGame.GameLogic
             Console.WriteLine($"{playerHp1}{arrayProbel[raznitsahp]} |{playerHp2}");
             Console.SetCursorPosition((Console.WindowWidth) - longest * 3, 2);
             Console.WriteLine($"{playerMana1}{arrayProbel[raznitsaMana]} |{playerMana2}");
+            Console.SetCursorPosition(0, 0);
         }
     }
 }
