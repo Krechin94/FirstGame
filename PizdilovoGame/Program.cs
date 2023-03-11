@@ -12,6 +12,7 @@ namespace PizdilovoGame
         {
             WorkWithFileLogic workWithFileLogic = new WorkWithFileLogic();
             WritingInfoInConsole writingInfoInConsole = new WritingInfoInConsole();
+
             workWithFileLogic.CheckingAndCreatingDirectory();
             try
             {
@@ -62,10 +63,15 @@ namespace PizdilovoGame
                                 break;
                             }
                     }
+
                     Console.Clear();
                 }
 
-                Console.Clear();
+                var playerManager = new PlayerInfoManager(players[0], players[1]);
+                foreach (Player player in players)
+                {
+                    player.HpAndManaChanged += playerManager.PrintInfo;
+                }
 
                 Console.WriteLine("Драка Начинается");        
                 Console.WriteLine("Кто проиграет тот лох");
@@ -73,17 +79,13 @@ namespace PizdilovoGame
                 int nomer = random.Next(0, kolichestvo);
                 IPlayer currentChamp = players[nomer];
                 IPlayer anotherChamp = nomer == 0 ? players[1] : players[0];
-                writingInfoInConsole.PlayerInfo(currentChamp, anotherChamp);
+
                 do
                 {
-                    writingInfoInConsole.PlayerInfo(currentChamp, anotherChamp);
                     currentChamp.Udar(anotherChamp);
-                    Console.Clear();
-                    writingInfoInConsole.PlayerInfo(currentChamp, anotherChamp);
                     anotherChamp.Udar(currentChamp);
-                    Console.Clear();
                 }
-                while (currentChamp.HP > 0 && anotherChamp.HP > 0 || currentChamp.Stamina > 0 && anotherChamp.Stamina > 0);
+                while (currentChamp.HP > 0 && anotherChamp.HP > 0);
 
                 if (currentChamp.HP > anotherChamp.HP)
                 {

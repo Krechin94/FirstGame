@@ -8,17 +8,36 @@ namespace PizdilovoGame
     public class Player : IPlayer
     {
         private IWeapon _currentWeapon;
-
+        private int _hp;
+        private int _stamina;
         private readonly Random _random = new Random();
         private readonly VvodChisla _vvodChisla = new VvodChisla();
 
-        public int HP { get; set; }
-        public int Stamina { get; set; }
-        public string Name { get; set; }        
+        public event Action HpAndManaChanged;
+
+        public int HP
+        {
+            get => _hp;
+            set
+            {
+                _hp = value;
+                HpAndManaChanged?.Invoke();
+            }
+        }
+        public int Stamina 
+        { 
+            get => _stamina;
+            set
+            {
+                _stamina = value;
+                HpAndManaChanged?.Invoke();
+            }
+        }
+        public string Name { get; set; }
         public string Nation { get; set; }
 
         public void Udar(IPlayer enemy)
-        {                      
+        {
             if (_currentWeapon == null)
             {
                 enemy.HP--;
@@ -54,10 +73,10 @@ namespace PizdilovoGame
                             if (d == 0)
                             {
                                 Console.WriteLine("TEBE POVEZLO");
-                                this.Udar(enemy);                                    
+                                this.Udar(enemy);
                             }
                             break;
-                        }                      
+                        }
                 }
             }
         }
