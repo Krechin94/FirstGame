@@ -1,64 +1,110 @@
 ﻿using PizdilovoGame.Rassi;
 using System;
+using System.Linq;
+using System.Numerics;
 
 namespace PizdilovoGame.GameLogic
 {
     internal class WritingInfoInConsole
     {
-        int longest;
-        int raznitsahp;
-        int raznitsaName;
-        int raznitsaMana;
-        string[] arrayProbel = new string[10] { "", " ", "  ", "   ", "    ","     ","      ", "       ", "        ", "         " };
+        enum DisplayColumn { Left, Right };
+        enum DisplayLine { Name, HP, Mana };
+
+        const int MaxInfoStringLength = 8;
+        const string Delimiter = "    |    ";
+
+        private int _maximumTableSize;
+
+        public WritingInfoInConsole()
+        {
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            // get column count based on DisplayColumn enumeration
+            var numberOfColumns = Enum.GetValues<DisplayColumn>().Length;
+            var numberOfDelimiters = numberOfColumns - 1;
+
+            _maximumTableSize = MaxInfoStringLength * numberOfColumns + Delimiter.Length * numberOfDelimiters;
+        }
+
         public void PlayerInfo(IPlayer player1, IPlayer player2)
         {
-            var playerName1 = $"{player1.Name}";
-            var playerName2 = $"{player2.Name}";
-            var playerHp1 = $"{player1.HP} HP";
-            var playerHp2 = $"{player2.HP} HP";
-            var playerMana1 = $"{player1.Stamina} Mana";
-            var playerMana2 = $"{player2.Stamina} Mana";
-            if (playerName1.Length > playerHp1.Length)
+            PrintDelimiters();
+            PrintForPlayer(player1, DisplayColumn.Left);
+            PrintForPlayer(player2, DisplayColumn.Right);
+        }
+
+        private void PrintDelimiters()
+        {
+            // get column count based on DisplayColumn enumeration
+            var numberOfColumns = Enum.GetValues<DisplayColumn>().Length;
+
+            // get line count based on DisplayLine enumeration
+            var numberOfLines = Enum.GetValues<DisplayLine>().Length;
+            for (var line = 0; line < numberOfLines; line++)
             {
-                if (playerName1.Length > playerMana1.Length)
+                // start printing from second column
+                for (var column = 1; column < numberOfColumns; column++)
                 {
-                    longest = playerName1.Length;
-                    raznitsaName = 0;
-                    raznitsahp = longest - playerHp1.Length;
-                    raznitsaMana = longest - playerMana1.Length;
-                }
-                else
-                {
-                    longest = playerMana1.Length;
-                    raznitsaName = longest - playerName1.Length;
-                    raznitsahp = longest - playerHp1.Length;
-                    raznitsaMana = 0;
-                }
-            }
-            else
-            {
-                if (playerHp1.Length > playerMana1.Length)
-                {
-                    longest = playerHp1.Length;
-                    raznitsaName = longest - playerName1.Length;
-                    raznitsahp = 0;
-                    raznitsaMana = longest - playerMana1.Length;
-                }
-                else
-                {
-                    longest = playerMana1.Length;
-                    raznitsaName = longest - playerName1.Length;
-                    raznitsahp = longest - playerHp1.Length;
-                    raznitsaMana = 0;
+                    var delimiter = column - 1;
+                    var currentCursorPosition = _maximumTableSize - MaxInfoStringLength * column - delimiter * Delimiter.Length;
+                    Console.SetCursorPosition((Console.WindowWidth) - currentCursorPosition, line);
+                    Console.WriteLine($"{Delimiter}");
                 }
             }
 
-            Console.SetCursorPosition((Console.WindowWidth) - longest * 3, 0);
-            Console.WriteLine($"{playerName1}{arrayProbel[raznitsaName]} |{playerName2}");
-            Console.SetCursorPosition((Console.WindowWidth) - longest * 3, 1);
-            Console.WriteLine($"{playerHp1}{arrayProbel[raznitsahp]} |{playerHp2}");
-            Console.SetCursorPosition((Console.WindowWidth) - longest * 3, 2);
-            Console.WriteLine($"{playerMana1}{arrayProbel[raznitsaMana]} |{playerMana2}");
+            // reset position for further use
+            Console.SetCursorPosition(0, 0);
+        }
+
+        private void PrintForPlayer(IPlayer player, DisplayColumn column)
+        {
+            PrintName(player.Name, column);
+            PrintHealth(player.HP, column);
+            PrintMana(player.Stamina, column);
+        }
+
+        private void PrintName(string playerName, DisplayColumn column)
+        {
+            PrintCell(DisplayLine.Name, column, playerName);
+        }
+
+        private void PrintHealth(int playerHealth, DisplayColumn column)
+        {
+            PrintCell(DisplayLine.HP, column, $"{playerHealth} HP");
+        }
+
+        private void PrintMana(int playerMana, DisplayColumn column)
+        {
+            PrintCell(DisplayLine.Mana, column, $"{playerMana} Mana");
+        }
+
+        private void PrintCell(DisplayLine line, DisplayColumn column, string message)
+        {
+            var printedMessage = message;
+
+            // crop message if it's too big
+            if (printedMessage.Length > MaxInfoStringLength)
+            {
+                printedMessage = printedMessage.Substring(0, MaxInfoStringLength - 3);
+                printedMessage += "...";
+            }
+
+            // add spaces if there's room for it
+            var spaceCount = (MaxInfoStringLength - printedMessage.Length) % 4;
+            for (var i = 0; i < spaceCount; i++)
+            {
+                printedMessage += '\t';
+            }
+
+            var currentCursorPosition = _maximumTableSize - MaxInfoStringLength * (int)column - (int)column * Delimiter.Length;
+            Console.SetCursorPosition((Console.WindowWidth) - currentCursorPosition, (int)line);
+            Console.WriteLine($"{printedMessage}");
+
+            // reset position for further use
+            Console.SetCursorPosition(0, 0);
         }
     }
 }
