@@ -10,7 +10,7 @@ namespace PizdilovoGame.GameLogic
         int raznitsahp;
         int raznitsaName;
         int raznitsaMana;
-        string[] arrayProbel = new string[10] { "", " ", "  ", "   ", "    ","     ","      ", "       ", "        ", "         " };
+
         public void PlayerInfo(IPlayer player1, IPlayer player2)
         {
             var playerName1 = $"{player1.Name}";
@@ -21,14 +21,14 @@ namespace PizdilovoGame.GameLogic
             var playerMana2 = $"{player2.Stamina} Mana";
 
             var displayInfoLengths = new List<int>
-        {
-            playerName1.Length,
-            playerName2.Length,
-            playerHp1.Length,
-            playerHp2.Length,
-            playerMana1.Length,
-            playerMana2.Length,
-        };
+            {
+                playerName1.Length,
+                playerName2.Length,
+                playerHp1.Length,
+                playerHp2.Length,
+                playerMana1.Length,
+                playerMana2.Length,
+            };
 
             displayInfoLengths.Sort();
             var longest = displayInfoLengths.Last();
@@ -49,7 +49,7 @@ namespace PizdilovoGame.GameLogic
             Console.SetCursorPosition(0, 0);
         }
 
-        public string Viravnivanie(int raznitsaDlini, string text)
+        private string Viravnivanie(int raznitsaDlini, string text)
         {
             for (int i = 0; i < raznitsaDlini; i++)
             {

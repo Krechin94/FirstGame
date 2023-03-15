@@ -21,20 +21,20 @@ namespace PizdilovoGame
             set
             {
                 _hp = value;
-
                 HpAndManaChanged?.Invoke();
             }
         }
+
         public int Stamina 
         { 
             get => _stamina;
             set
             {
                 _stamina = value;
-
                 HpAndManaChanged?.Invoke();
             }
         }
+
         public string Name { get; set; }
         public string Nation { get; set; }
 
@@ -90,7 +90,7 @@ namespace PizdilovoGame
 
         public override string ToString()
         {
-            return base.ToString();
+            return Name;
         }
     }
 }

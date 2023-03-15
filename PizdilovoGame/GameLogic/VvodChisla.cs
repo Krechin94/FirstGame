@@ -1,6 +1,5 @@
 ﻿using PizdilovoGame.Exceptions;
 using System;
-using System.IO;
 
 namespace PizdilovoGame.GameLogic
 {
