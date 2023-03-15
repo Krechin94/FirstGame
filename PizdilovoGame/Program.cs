@@ -84,9 +84,7 @@ namespace PizdilovoGame
                 do
                 {
                     currentChamp.Udar(anotherChamp);
-                   //_comboHit.ProverkaNaCombo(currentChamp);
                     anotherChamp.Udar(currentChamp);
-                   // _comboHit.ProverkaNaCombo(anotherChamp);
                 }
                 while (currentChamp.HP > 0 && anotherChamp.HP > 0 || currentChamp.Stamina > 0 && anotherChamp.Stamina > 0);
 
