@@ -11,7 +11,6 @@ namespace PizdilovoGame.Rassi
         string Name { get; set; }   
 
         int Stamina { get; set; }
-        int KudaYdar { get; }
 
         void Udar(IPlayer enemy);
 

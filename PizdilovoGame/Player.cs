@@ -38,7 +38,6 @@ namespace PizdilovoGame
 
         public string Name { get; set; }
         public string Nation { get; set; }
-        public int KudaYdar { get; set; }
 
         public void Udar(IPlayer enemy)
         {
@@ -80,7 +79,7 @@ namespace PizdilovoGame
                                 this.Udar(enemy);
                             }
                             break;
-                        }                      
+                        }
                 }
 
                 ProverkaNaCombo(kuda);
