@@ -1,7 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using PizdilovoGame.Exceptions;
+using System;
 
-namespace PizdilovoGame
+namespace PizdilovoGame.GameLogic
 {
     internal class VvodChisla
     {
@@ -12,18 +12,18 @@ namespace PizdilovoGame
         {
             do
             {
-               DateTime dateTime = DateTime.Now;
+                DateTime dateTime = DateTime.Now;
                 try
                 {
                     Chislo = int.Parse(Console.ReadLine());
-                   if (Chislo != 1 && Chislo != 2 && Chislo != 2)
+                    if (Chislo != 1 && Chislo != 2 && Chislo != 3)
                     {
                         throw new WrongUserInputException();
                     }
                 }
                 catch (FormatException ex)
                 {
-                    Console.WriteLine("Не вводи буквы попробуй ввести еще раз"); 
+                    Console.WriteLine("Не вводи буквы попробуй ввести еще раз");
                     workWithFileLogic.WritingFile(ex.Message, ex.StackTrace);
                 }
                 catch (WrongUserInputException wuie)
@@ -35,8 +35,8 @@ namespace PizdilovoGame
             }
             while (Chislo != 1 && Chislo != 2 && Chislo != 3);
 
-             Number = Chislo;
+            Number = Chislo;
         }
-       
+
     }
 }
