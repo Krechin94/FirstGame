@@ -87,5 +87,10 @@ namespace PizdilovoGame
         {
             _currentWeapon = weapon;
         }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }
