@@ -7,23 +7,22 @@ namespace PizdilovoGame.GameLogic
 {
     internal class ComboHitLogic
     {
-        public int HitType { get; set; }
-        int[] combo = new int[2] { 1, 2 };
-        Queue<int> comboHitQueue = new Queue<int>();
+        int[] _combo = new int[2] { 1, 2 };
+        Queue<int> _comboHitQueue = new Queue<int>();
 
         public void ProverkaNaCombo(IPlayer player)
         {
-            if (comboHitQueue.Count == combo.Length)
+            if (_comboHitQueue.Count == _combo.Length)
             {
-                comboHitQueue.Dequeue();
+                _comboHitQueue.Dequeue();
             }
-            comboHitQueue.Enqueue(player.KudaYdar);
-            int[] comboHit = comboHitQueue.ToArray();
-            for (int j = 0; j < comboHit.Length; j++)
+            _comboHitQueue.Enqueue(player.KudaYdar);
+            int[] _comboHit = _comboHitQueue.ToArray();
+            for (int j = 0; j < _comboHit.Length; j++)
             {
-                if (combo[j] == comboHit[j])
+                if (_combo[j] == _comboHit[j])
                 {
-                    if (j == combo.Length - 1)
+                    if (j == _combo.Length - 1)
                     {
                         Console.WriteLine("Тебе повезло, ты открыл супер удар, поэтому бьешь еще раз");
                     }
