@@ -3,6 +3,8 @@ using PizdilovoGame.Rassi;
 using PizdilovoGame.Weapons;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 
 namespace PizdilovoGame
 {
@@ -72,12 +74,6 @@ namespace PizdilovoGame
                         {
                             enemy.HP = enemy.HP - 1;
                             Console.WriteLine($" ты наносишь 1 урон");
-                            int d = _random.Next(0, 2);
-                            if (d == 0)
-                            {
-                                Console.WriteLine("TEBE POVEZLO");
-                                this.Udar(enemy);
-                            }
                             break;
                         }
                 }
@@ -96,7 +92,7 @@ namespace PizdilovoGame
             return Name;
         }
 
-        int[] _combo = new int[2] { 1, 2 };
+        int[] _combo = new int[3] { 1, 2, 3 };
         Queue<int> _comboHitQueue = new Queue<int>();
         public void ProverkaNaCombo(int kudaYdaril)
         {
@@ -105,22 +101,12 @@ namespace PizdilovoGame
                 _comboHitQueue.Dequeue();
             }
             _comboHitQueue.Enqueue(kudaYdaril);
-            int[] _comboHit = _comboHitQueue.ToArray();
-            for (int j = 0; j < _comboHit.Length; j++)
+
+            if (_combo.SequenceEqual(_comboHitQueue))
             {
-                if (_combo[j] == _comboHit[j])
-                {
-                    if (j == _combo.Length - 1)
-                    {
-                        Console.WriteLine("Тебе повезло, ты открыл супер удар, поэтому бьешь еще раз");
-                        this.HP =this.HP + kudaYdaril * 4;
-                    }
-                    continue;
-                }
-                else
-                {
-                    break;
-                }
+                Console.WriteLine("Тебе повезло, ты открыл супер удар, поэтому бьешь еще раз");
+                Thread.Sleep(2000);
+                this.HP = this.HP + kudaYdaril * 4;
             }
         }
     }
