@@ -18,6 +18,8 @@ namespace PizdilovoGame.GameLogic
             var playerHp2 = $"{player2.HP} HP";
             var playerMana1 = $"{player1.Stamina} Mana";
             var playerMana2 = $"{player2.Stamina} Mana";
+
+
             if (playerName1.Length > playerHp1.Length)
             {
                 if (playerName1.Length > playerMana1.Length)

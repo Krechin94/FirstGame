@@ -21,6 +21,7 @@ namespace PizdilovoGame
             set
             {
                 _hp = value;
+
                 HpAndManaChanged?.Invoke();
             }
         }
@@ -30,6 +31,7 @@ namespace PizdilovoGame
             set
             {
                 _stamina = value;
+
                 HpAndManaChanged?.Invoke();
             }
         }
