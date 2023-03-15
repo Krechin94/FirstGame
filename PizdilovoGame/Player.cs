@@ -1,6 +1,7 @@
 ﻿using PizdilovoGame.Rassi;
 using PizdilovoGame.Weapons;
 using System;
+using System.Collections.Generic;
 
 namespace PizdilovoGame
 {
@@ -35,7 +36,6 @@ namespace PizdilovoGame
 
                 Console.WriteLine(this.Name + " " + this.HP);
                 var kuda = _vvodChisla.Number;
-                this.KudaYdar = kuda;
                 switch (kuda)
                 {
                     case 1:
@@ -64,7 +64,9 @@ namespace PizdilovoGame
                             }
                             break;
                         }                      
-                }                                                  
+                }
+
+                ProverkaNaCombo(kuda);
             }
         }
 
@@ -76,6 +78,34 @@ namespace PizdilovoGame
         public override string ToString()
         {
             return $" {Name} Nation: {Nation}  Stamina: {Stamina} HP: {HP} Weapon: {_currentWeapon}";
+        }
+
+        int[] _combo = new int[2] { 1, 2 };
+        Queue<int> _comboHitQueue = new Queue<int>();
+        public void ProverkaNaCombo(int kudaYdaril)
+        {
+            if (_comboHitQueue.Count == _combo.Length)
+            {
+                _comboHitQueue.Dequeue();
+            }
+            _comboHitQueue.Enqueue(kudaYdaril);
+            int[] _comboHit = _comboHitQueue.ToArray();
+            for (int j = 0; j < _comboHit.Length; j++)
+            {
+                if (_combo[j] == _comboHit[j])
+                {
+                    if (j == _combo.Length - 1)
+                    {
+                        Console.WriteLine("Тебе повезло, ты открыл супер удар, поэтому бьешь еще раз");
+                        this.HP++;
+                    }
+                    continue;
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
     }
 }
