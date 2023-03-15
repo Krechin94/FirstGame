@@ -1,8 +1,7 @@
 ﻿using PizdilovoGame.Weapons;
 using PizdilovoGame.Rassi;
 using System;
-using System.IO;
-using PizdilovoGame.GameLogic;
+
 
 namespace PizdilovoGame
 {
@@ -13,7 +12,6 @@ namespace PizdilovoGame
         {
             WorkWithFileLogic workWithFileLogic = new WorkWithFileLogic();
             workWithFileLogic.CheckingAndCreatingDirectory();
-            ComboHitLogic _comboHit = new ComboHitLogic();
             try
             {
                 Console.WriteLine("Добро пожаловать в игру");
@@ -84,9 +82,7 @@ namespace PizdilovoGame
                 do
                 {
                     currentChamp.Udar(anotherChamp);
-                   //_comboHit.ProverkaNaCombo(currentChamp);
                     anotherChamp.Udar(currentChamp);
-                   // _comboHit.ProverkaNaCombo(anotherChamp);
                 }
                 while (currentChamp.HP > 0 && anotherChamp.HP > 0 || currentChamp.Stamina > 0 && anotherChamp.Stamina > 0);
 

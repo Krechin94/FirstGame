@@ -97,7 +97,7 @@ namespace PizdilovoGame
                     if (j == _combo.Length - 1)
                     {
                         Console.WriteLine("Тебе повезло, ты открыл супер удар, поэтому бьешь еще раз");
-                        this.HP++;
+                        this.HP =this.HP + kudaYdaril * 4;
                     }
                     continue;
                 }
