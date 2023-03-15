@@ -1,7 +1,7 @@
 ﻿using PizdilovoGame.Weapons;
 using PizdilovoGame.Rassi;
 using System;
-
+using PizdilovoGame.GameLogic;
 
 namespace PizdilovoGame
 {
@@ -11,6 +11,8 @@ namespace PizdilovoGame
         static void Main(string[] args)             
         {
             WorkWithFileLogic workWithFileLogic = new WorkWithFileLogic();
+            WritingInfoInConsole writingInfoInConsole = new WritingInfoInConsole();
+
             workWithFileLogic.CheckingAndCreatingDirectory();
             try
             {
@@ -61,30 +63,29 @@ namespace PizdilovoGame
                                 break;
                             }
                     }
-                    
+
                     Console.Clear();
                 }
 
-                Console.Clear();
-
-                Console.WriteLine("Драка сегодня будет между");
-                foreach (IPlayer player in players)
-                {                                      
-                        Console.WriteLine(player.ToString());
+                var playerManager = new PlayerInfoManager(players[0], players[1]);
+                foreach (Player player in players)
+                {
+                    player.HpAndManaChanged += playerManager.PrintInfo;
                 }
+
+                Console.WriteLine("Драка Начинается");        
                 Console.WriteLine("Кто проиграет тот лох");
 
                 int nomer = random.Next(0, kolichestvo);
                 IPlayer currentChamp = players[nomer];
                 IPlayer anotherChamp = nomer == 0 ? players[1] : players[0];
-                Console.WriteLine(currentChamp.ToString());
 
                 do
                 {
                     currentChamp.Udar(anotherChamp);
                     anotherChamp.Udar(currentChamp);
                 }
-                while (currentChamp.HP > 0 && anotherChamp.HP > 0 || currentChamp.Stamina > 0 && anotherChamp.Stamina > 0);
+                while (currentChamp.HP > 0 && anotherChamp.HP > 0);
 
                 if (currentChamp.HP > anotherChamp.HP)
                 {
