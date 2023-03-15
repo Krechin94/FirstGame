@@ -15,6 +15,7 @@ namespace PizdilovoGame
         public int Stamina { get; set; }
         public string Name { get; set; }        
         public string Nation { get; set; }
+        public int KudaYdar { get; set; }
 
         public void Udar(IPlayer enemy)
         {                      
@@ -33,8 +34,8 @@ namespace PizdilovoGame
                 _vvodChisla.Vvod();
 
                 Console.WriteLine(this.Name + " " + this.HP);
-
                 var kuda = _vvodChisla.Number;
+                this.KudaYdar = kuda;
                 switch (kuda)
                 {
                     case 1:
