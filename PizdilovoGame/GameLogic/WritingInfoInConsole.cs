@@ -17,8 +17,8 @@ namespace PizdilovoGame.GameLogic
             var playerName2 = $"{player2.Name}";
             var playerHp1 = $"{player1.HP} HP";
             var playerHp2 = $"{player2.HP} HP";
-            var playerMana1 = $"{player1.Stamina} Mana";
-            var playerMana2 = $"{player2.Stamina} Mana";
+            var playerMana1 = $"{player1.Mana} Mana";
+            var playerMana2 = $"{player2.Mana} Mana";
 
             var displayInfoLengths = new List<int>
             {

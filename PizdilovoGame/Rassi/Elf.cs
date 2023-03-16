@@ -6,8 +6,8 @@ namespace PizdilovoGame.Rassi
     {
         public Elf()
         {
-            HP = 80;
-            Stamina = 120;
+            HP = 100;
+            Mana = 0;
             Nation = "Elf";
         }
     }

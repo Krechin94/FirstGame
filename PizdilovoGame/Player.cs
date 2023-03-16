@@ -25,7 +25,7 @@ namespace PizdilovoGame
             }
         }
 
-        public int Stamina 
+        public int Mana 
         { 
             get => _stamina;
             set
@@ -43,7 +43,7 @@ namespace PizdilovoGame
             if (_currentWeapon == null)
             {
                 enemy.HP--;
-                this.Stamina--;
+                this.Mana--;
             }
             else
             {

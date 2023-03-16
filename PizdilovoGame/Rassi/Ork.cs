@@ -6,8 +6,8 @@ namespace PizdilovoGame.Rassi
     {
         public Ork()
         {
-            HP = 120;
-            Stamina = 80;
+            HP = 100;
+            Mana = 0;
             Nation = "Ork";
         }
     }

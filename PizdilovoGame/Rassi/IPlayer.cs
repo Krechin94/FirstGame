@@ -1,5 +1,4 @@
-﻿
-using PizdilovoGame.Weapons;
+﻿using PizdilovoGame.Weapons;
 using System;
 
 namespace PizdilovoGame.Rassi
@@ -10,7 +9,7 @@ namespace PizdilovoGame.Rassi
         int HP { get; set; }
         string Name { get; set; }   
 
-        int Stamina { get; set; }
+        int Mana { get; set; }
 
         void Udar(IPlayer enemy);
 
