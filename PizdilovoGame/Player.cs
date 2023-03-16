@@ -55,28 +55,25 @@ namespace PizdilovoGame
                 {
                     case 1:
                         {
-                            int a = _random.Next(0, 4);
+                            int a = _random.Next(1, 10);
                             enemy.HP = enemy.HP - a;
+                            ManaNotBigger10(this);
                             Console.WriteLine($" ты наносишь {a} урона");
                             break;
                         }
                     case 2:
                         {
-                            int b = _random.Next(1, 3);
+                            int b = _random.Next(3, 6);
                             enemy.HP = enemy.HP - b;
+                            ManaNotBigger10(this);
                             Console.WriteLine($" ты наносишь {b} урона");
                             break;
                         }
                     case 3:
                         {
-                            enemy.HP = enemy.HP - 1;
-                            Console.WriteLine($" ты наносишь 1 урон");
-                            int d = _random.Next(0, 2);
-                            if (d == 0)
-                            {
-                                Console.WriteLine("TEBE POVEZLO");
-                                this.Udar(enemy);
-                            }
+                            enemy.HP = enemy.HP - 4;
+                            ManaNotBigger10(this);
+                            Console.WriteLine($" ты наносишь 4 урона");
                             break;
                         }
                 }
@@ -91,6 +88,14 @@ namespace PizdilovoGame
         public override string ToString()
         {
             return Name;
+        }
+
+        public void ManaNotBigger10 (IPlayer player)
+        {
+            if (player.Mana < 10)
+            {
+                player.Mana++;
+            }
         }
     }
 }
