@@ -127,7 +127,7 @@ namespace PizdilovoGame
                 {
                     if (player1.Nation == buff.Affiliations || buff.Affiliations =="All")
                     {
-                        string text = "Вы можете использовать" + buff.Name + "\n";
+                        string text = $"Заклинание номер - {i+1} {buff.Name}\n";
                         Console.SetCursorPosition((Console.WindowWidth) - text.Length, 4 + i);
                         Console.WriteLine(text);
                         list.Add(buff);
