@@ -58,10 +58,15 @@ namespace PizdilovoGame
             }
             else
             {
+                List<IBuffs> list = ChekingBuffsForYou(allBuffsOfPlayers, this, enemy);
+                Console.SetCursorPosition(0, 3);
+                if (list.Count > 0)
+                {
+                    ViborBuffs(list, this, enemy);
+                    Console.Clear();
+                }
                 Console.WriteLine($"Сейчас бьет {Name}");
                 Console.WriteLine("Куда бить 1 - голова, 2 - туловище, 3 - ноги");
-                ChekingBuffsForYou(allBuffsOfPlayers, this);
-                Console.SetCursorPosition(0, 3);
                 _vvodChisla.Vvod();
                 Console.Clear();
                 var kuda = _vvodChisla.Number;
@@ -112,9 +117,10 @@ namespace PizdilovoGame
             }
         }
 
-        private void ChekingBuffsForYou(List<IBuffs> buffs, IPlayer player1)
+        private List<IBuffs> ChekingBuffsForYou(List<IBuffs> buffs, IPlayer player1, IPlayer player2)
         {
             int i = 0;
+            List<IBuffs> list = new List<IBuffs>();
             foreach (var buff in buffs)
             {
                 if (player1.Mana >= buff.Cost)
@@ -124,10 +130,20 @@ namespace PizdilovoGame
                         string text = "Вы можете использовать" + buff.Name + "\n";
                         Console.SetCursorPosition((Console.WindowWidth) - text.Length, 4 + i);
                         Console.WriteLine(text);
+                        list.Add(buff);
                         i++;
                     }
                 }
             }
+            return list;
+        }
+
+        private void ViborBuffs(List<IBuffs> buffs, IPlayer player1, IPlayer player2)
+        {
+            int count = buffs.Count;
+            Console.WriteLine($"Vvedi Chislo ot 1 do {count}");
+            int chislo = int.Parse(Console.ReadLine());
+            buffs[chislo - 1].Activate(player1, player2);
         }
     }
 }
