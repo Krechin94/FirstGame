@@ -1,7 +1,9 @@
-﻿using PizdilovoGame.GameLogic;
+﻿using PizdilovoGame.Buffs;
+using PizdilovoGame.GameLogic;
 using PizdilovoGame.Rassi;
 using PizdilovoGame.Weapons;
 using System;
+using System.Collections.Generic;
 
 namespace PizdilovoGame
 {
@@ -38,6 +40,15 @@ namespace PizdilovoGame
         public string Name { get; set; }
         public string Nation { get; set; }
 
+        List<IBuffs> allBuffsOfPlayers = new List<IBuffs>
+        {
+            new HpRestoring(),
+            new LightlyWisp(),
+            new ManaRestoring(),
+            new SpitIntoTheFace(),
+            new WetWilly(),
+        };
+
         public void Udar(IPlayer enemy)
         {
             if (_currentWeapon == null)
@@ -49,7 +60,10 @@ namespace PizdilovoGame
             {
                 Console.WriteLine($"Сейчас бьет {Name}");
                 Console.WriteLine("Куда бить 1 - голова, 2 - туловище, 3 - ноги");
+                ChekingBuffsForYou(allBuffsOfPlayers, this);
+                Console.SetCursorPosition(0, 3);
                 _vvodChisla.Vvod();
+                Console.Clear();
                 var kuda = _vvodChisla.Number;
                 switch (kuda)
                 {
@@ -90,11 +104,29 @@ namespace PizdilovoGame
             return Name;
         }
 
-        public void ManaNotBigger10 (IPlayer player)
+        private void ManaNotBigger10 (IPlayer player)
         {
             if (player.Mana < 10)
             {
                 player.Mana++;
+            }
+        }
+
+        private void ChekingBuffsForYou(List<IBuffs> buffs, IPlayer player1)
+        {
+            int i = 0;
+            foreach (var buff in buffs)
+            {
+                if (player1.Mana >= buff.Cost)
+                {
+                    if (player1.Nation == buff.Affiliations || buff.Affiliations =="All")
+                    {
+                        string text = "Вы можете использовать" + buff.Name + "\n";
+                        Console.SetCursorPosition((Console.WindowWidth) - text.Length, 4 + i);
+                        Console.WriteLine(text);
+                        i++;
+                    }
+                }
             }
         }
     }

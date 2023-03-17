@@ -17,7 +17,6 @@ namespace PizdilovoGame.GameLogic
 
         public void PrintInfo()
         {
-            Console.Clear();
             _console.PlayerInfo(_player1, _player2);
         }
     }

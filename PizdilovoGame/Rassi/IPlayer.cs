@@ -10,6 +10,7 @@ namespace PizdilovoGame.Rassi
         string Name { get; set; }   
 
         int Mana { get; set; }
+        string Nation { get; set; }
 
         void Udar(IPlayer enemy);
 
