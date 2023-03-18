@@ -60,11 +60,7 @@ namespace PizdilovoGame
             {
                 List<IBuffs> list = ChekingBuffsForYou(allBuffsOfPlayers, this, enemy);
                 Console.SetCursorPosition(0, 3);
-                if (list.Count > 0)
-                {
-                    ViborBuffs(list, this, enemy);
-                    Console.Clear();
-                }
+                ViborBuffs(list, this, enemy);
                 Console.WriteLine($"Сейчас бьет {Name}");
                 Console.WriteLine("Куда бить 1 - голова, 2 - туловище, 3 - ноги");
                 _vvodChisla.Vvod();
@@ -140,10 +136,14 @@ namespace PizdilovoGame
 
         private void ViborBuffs(List<IBuffs> buffs, IPlayer player1, IPlayer player2)
         {
-            int count = buffs.Count;
-            Console.WriteLine($"Vvedi Chislo ot 1 do {count}");
-            int chislo = int.Parse(Console.ReadLine());
-            buffs[chislo - 1].Activate(player1, player2);
+            if (buffs.Count > 0)
+            {
+                int count = buffs.Count;
+                Console.WriteLine($"Vvedi Chislo ot 1 do {count}");
+                int chislo = int.Parse(Console.ReadLine());
+                buffs[chislo - 1].Activate(player1, player2);
+                Console.Clear();
+            }
         }
     }
 }
