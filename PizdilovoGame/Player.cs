@@ -63,9 +63,9 @@ namespace PizdilovoGame
                 ViborBuffs(list, this, enemy);
                 Console.WriteLine($"Сейчас бьет {Name}");
                 Console.WriteLine("Куда бить 1 - голова, 2 - туловище, 3 - ноги");
-                _vvodChisla.Vvod();
+                _vvodChisla.Vvod(3);
                 Console.Clear();
-                var kuda = _vvodChisla.Number;
+                var kuda = _vvodChisla.number;
                 switch (kuda)
                 {
                     case 1:
@@ -140,7 +140,8 @@ namespace PizdilovoGame
             {
                 int count = buffs.Count;
                 Console.WriteLine($"Vvedi Chislo ot 1 do {count}");
-                int chislo = int.Parse(Console.ReadLine());
+                _vvodChisla.Vvod(count);
+                int chislo = _vvodChisla.number;
                 buffs[chislo - 1].Activate(player1, player2);
                 Console.Clear();
             }

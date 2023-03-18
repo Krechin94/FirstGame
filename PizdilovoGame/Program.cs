@@ -26,8 +26,8 @@ namespace PizdilovoGame
                 for (int i = 0; i < kolichestvo; i++)
                 {
                     Console.WriteLine("Выберите персонажа \n Elf - 1 \n Ork -2 \n Human - 3");
-                    vvodChisla.Vvod();                    
-                    int personazh = vvodChisla.Number;
+                    vvodChisla.Vvod(3);                    
+                    int personazh = vvodChisla.number;
                                        
                     switch (personazh)
                     {
@@ -100,15 +100,16 @@ namespace PizdilovoGame
             {
                 Console.WriteLine($"Произошло что-то непредвиденное и программа дальше работать не будет. Смотрите логи в папке {Environment.SpecialFolder.ApplicationData}");
                 workWithFileLogic.WritingFile(ex.Message, ex.StackTrace);
+                throw;
             }
          }
            public static IWeapon ChooseWeapon()
             {
                 Console.WriteLine("Выберите оружие \n Axe - 1 \n Sword -2 \n Shield - 3");
                 VvodChisla vvodChisla = new VvodChisla();
-                vvodChisla.Vvod();
+                vvodChisla.Vvod(3);
 
-                int personazh = vvodChisla.Number;
+                int personazh = vvodChisla.number;
 
                 IWeapon chosenWeapon;
                 switch (personazh)
