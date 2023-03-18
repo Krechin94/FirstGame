@@ -12,7 +12,6 @@ namespace PizdilovoGame.GameLogic
         {
             do
             {
-                DateTime dateTime = DateTime.Now;
                 try
                 {
                     Chislo = int.Parse(Console.ReadLine());
