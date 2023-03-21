@@ -4,6 +4,8 @@ using PizdilovoGame.Rassi;
 using PizdilovoGame.Weapons;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 
 namespace PizdilovoGame
 {
@@ -95,6 +97,8 @@ namespace PizdilovoGame
                             break;
                         }
                 }
+
+                ProverkaNaCombo(kuda);
         }
 
         public void Equip(IWeapon weapon)
@@ -105,6 +109,24 @@ namespace PizdilovoGame
         public override string ToString()
         {
             return Name;
+        }
+
+        int[] _combo = new int[3] { 1, 2, 3 };
+        Queue<int> _comboHitQueue = new Queue<int>();
+        public void ProverkaNaCombo(int kudaYdaril)
+        {
+            if (_comboHitQueue.Count == _combo.Length)
+            {
+                _comboHitQueue.Dequeue();
+            }
+            _comboHitQueue.Enqueue(kudaYdaril);
+
+            if (_combo.SequenceEqual(_comboHitQueue))
+            {
+                Console.WriteLine("Тебе повезло, ты открыл супер удар, поэтому бьешь еще раз");
+                Thread.Sleep(2000);
+                this.HP = this.HP + kudaYdaril * 4;
+            }
         }
 
         private void ManaNotBigger10 (IPlayer player)
