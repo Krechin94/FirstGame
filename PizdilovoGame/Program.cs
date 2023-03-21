@@ -14,7 +14,7 @@ namespace PizdilovoGame
         {
             WorkWithFileLogic workWithFileLogic = new WorkWithFileLogic();
             WritingInfoInConsole writingInfoInConsole = new WritingInfoInConsole();
-            ChoosingRassaNameWeaponLogic choosingRassaNameWeaponLogic = new ChoosingRassaNameWeaponLogic();
+            PlayerCreator choosingRassaNameWeaponLogic = new PlayerCreator();
 
             workWithFileLogic.CheckingAndCreatingDirectory();
             try

@@ -16,8 +16,8 @@ namespace PizdilovoGame.Buffs
 
         public void Activate(IPlayer player1, IPlayer player2)
         {
-           player2.HP = player2.HP - 10;
-           player1.Mana = player1.Mana - Cost/2;
+            player1.Mana -= Cost / 2;
+            player2.HP -= 10;
         }
     }
 }

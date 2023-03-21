@@ -53,8 +53,8 @@ namespace PizdilovoGame
         List<IBuffs> allBuffsOfPlayers = new List<IBuffs>
         {
             new HpRestoring(),
-            new LightlyWisp(),
             new ManaRestoring(),
+            new LightlyWisp(),
             new SpitIntoTheFace(),
             new WetWilly(),
         };
