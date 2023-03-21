@@ -2,6 +2,9 @@
 using PizdilovoGame.Rassi;
 using PizdilovoGame.Weapons;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 
 namespace PizdilovoGame
 {
@@ -71,15 +74,11 @@ namespace PizdilovoGame
                         {
                             enemy.HP = enemy.HP - 1;
                             Console.WriteLine($" ты наносишь 1 урон");
-                            int d = _random.Next(0, 2);
-                            if (d == 0)
-                            {
-                                Console.WriteLine("TEBE POVEZLO");
-                                this.Udar(enemy);
-                            }
                             break;
                         }
                 }
+
+                ProverkaNaCombo(kuda);
             }
         }
 
@@ -91,6 +90,24 @@ namespace PizdilovoGame
         public override string ToString()
         {
             return Name;
+        }
+
+        int[] _combo = new int[3] { 1, 2, 3 };
+        Queue<int> _comboHitQueue = new Queue<int>();
+        public void ProverkaNaCombo(int kudaYdaril)
+        {
+            if (_comboHitQueue.Count == _combo.Length)
+            {
+                _comboHitQueue.Dequeue();
+            }
+            _comboHitQueue.Enqueue(kudaYdaril);
+
+            if (_combo.SequenceEqual(_comboHitQueue))
+            {
+                Console.WriteLine("Тебе повезло, ты открыл супер удар, поэтому бьешь еще раз");
+                Thread.Sleep(2000);
+                this.HP = this.HP + kudaYdaril * 4;
+            }
         }
     }
 }
