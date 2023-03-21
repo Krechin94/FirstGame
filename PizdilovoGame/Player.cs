@@ -14,6 +14,8 @@ namespace PizdilovoGame
         private int _stamina;
         private readonly Random _random = new Random();
         private readonly VvodChisla _vvodChisla = new VvodChisla();
+        private const int MaxMana = 10;
+        private const int MinMana = 0;
 
         public event Action HpAndManaChanged;
 
@@ -33,6 +35,14 @@ namespace PizdilovoGame
             set
             {
                 _stamina = value;
+                if (value < MinMana)
+                    _stamina = 0;
+                if (value > MaxMana)
+                    _stamina = 10;
+
+                if (_stamina == value)
+                    return;
+
                 HpAndManaChanged?.Invoke();
             }
         }
@@ -51,13 +61,6 @@ namespace PizdilovoGame
 
         public void Udar(IPlayer enemy)
         {
-            if (_currentWeapon == null)
-            {
-                enemy.HP--;
-                this.Mana--;
-            }
-            else
-            {
                 List<IBuffs> list = ChekingBuffsForYou(allBuffsOfPlayers, this, enemy);
                 Console.SetCursorPosition(0, 3);
                 ViborBuffs(list, this, enemy);
@@ -72,7 +75,7 @@ namespace PizdilovoGame
                         {
                             int a = _random.Next(1, 10);
                             enemy.HP = enemy.HP - a;
-                            ManaNotBigger10(this);
+                            this.Mana++;
                             Console.WriteLine($" ты наносишь {a} урона");
                             break;
                         }
@@ -80,19 +83,18 @@ namespace PizdilovoGame
                         {
                             int b = _random.Next(3, 6);
                             enemy.HP = enemy.HP - b;
-                            ManaNotBigger10(this);
+                            this.Mana++;
                             Console.WriteLine($" ты наносишь {b} урона");
                             break;
                         }
                     case 3:
                         {
                             enemy.HP = enemy.HP - 4;
-                            ManaNotBigger10(this);
+                            this.Mana++;
                             Console.WriteLine($" ты наносишь 4 урона");
                             break;
                         }
                 }
-            }
         }
 
         public void Equip(IWeapon weapon)

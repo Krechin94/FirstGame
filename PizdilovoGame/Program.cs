@@ -14,6 +14,7 @@ namespace PizdilovoGame
         {
             WorkWithFileLogic workWithFileLogic = new WorkWithFileLogic();
             WritingInfoInConsole writingInfoInConsole = new WritingInfoInConsole();
+            ChoosingRassaNameWeaponLogic choosingRassaNameWeaponLogic = new ChoosingRassaNameWeaponLogic();
 
             workWithFileLogic.CheckingAndCreatingDirectory();
             try
@@ -28,43 +29,10 @@ namespace PizdilovoGame
                 for (int i = 0; i < kolichestvo; i++)
                 {
                     Console.WriteLine("Выберите персонажа \n Elf - 1 \n Ork -2 \n Human - 3");
-                    vvodChisla.Vvod(3);                    
+                    vvodChisla.Vvod(3);
                     int personazh = vvodChisla.number;
-                                       
-                    switch (personazh)
-                    {
-                        case 1:
-                            {
-                                IPlayer elf = new Elf();
-
-                                Console.WriteLine("Введите имя");
-                                elf.Name = Console.ReadLine();
-                                elf.Equip(ChooseWeapon());
-                                _players[i] = elf;
-                                break;
-                            }
-                        case 2:
-                            {
-                                IPlayer ork = new Ork();
-
-                                Console.WriteLine("Введите имя");
-                                ork.Name = Console.ReadLine();
-                                ork.Equip(ChooseWeapon());
-                                _players[i] = ork;
-                                break;
-                            }
-                        case 3:
-                            {
-                                IPlayer human = new Human();
-
-                                Console.WriteLine("Введите имя");
-                                human.Name = Console.ReadLine();
-                                human.Equip(ChooseWeapon());
-
-                                _players[i] = human;
-                                break;
-                            }
-                    }
+                    _players[i] = choosingRassaNameWeaponLogic.SozdaniePersonozha(personazh);
+                    _players[i].Equip(ChooseWeapon());
 
                     Console.Clear();
                 }
@@ -154,12 +122,5 @@ namespace PizdilovoGame
 
                 return chosenWeapon;
             }
-
-
-
-           
-
-
-        
     }
 }
