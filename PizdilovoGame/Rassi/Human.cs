@@ -7,7 +7,7 @@ namespace PizdilovoGame.Rassi
         public Human()
         {
             HP = 100;
-            Stamina = 100;
+            Mana = 0;
             Nation = "Human";
         }
     }

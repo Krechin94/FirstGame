@@ -5,21 +5,25 @@ namespace PizdilovoGame.GameLogic
 {
     internal class VvodChisla
     {
-        public int Chislo;
-        public int Number;
+        public int chislo;
+        public int number;
+
         WorkWithFileLogic workWithFileLogic = new WorkWithFileLogic();
-        public void Vvod()
+        public void Vvod(int maxNumber)
         {
+            bool qwe = false;
             do
             {
-                DateTime dateTime = DateTime.Now;
                 try
                 {
-                    Chislo = int.Parse(Console.ReadLine());
-                    if (Chislo != 1 && Chislo != 2 && Chislo != 3)
+                    chislo = int.Parse(Console.ReadLine());
+                    if(chislo <= maxNumber  && chislo >= 0)
                     {
-                        throw new WrongUserInputException();
+                        qwe = true;
                     }
+                    else
+                        throw new WrongUserInputException(maxNumber);
+                    
                 }
                 catch (FormatException ex)
                 {
@@ -31,11 +35,10 @@ namespace PizdilovoGame.GameLogic
                     Console.WriteLine(wuie.Message + "\nПопробуй ввести еще раз");
                     workWithFileLogic.WritingFile(wuie.Message, wuie.StackTrace);
                 }
-
             }
-            while (Chislo != 1 && Chislo != 2 && Chislo != 3);
+            while (qwe != true);
 
-            Number = Chislo;
+            number = chislo;
         }
 
     }
