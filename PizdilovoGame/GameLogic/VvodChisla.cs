@@ -27,7 +27,7 @@ namespace PizdilovoGame.GameLogic
                 }
                 catch (FormatException ex)
                 {
-                    Console.WriteLine("Не вводи буквы попробуй ввести еще раз");
+                    WritingInConsole.FormatExMessageText();
                     workWithFileLogic.WritingFile(ex.Message, ex.StackTrace);
                 }
                 catch (WrongUserInputException wuie)

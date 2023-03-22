@@ -19,8 +19,7 @@ namespace PizdilovoGame
             workWithFileLogic.CheckingAndCreatingDirectory();
             try
             {
-                Console.WriteLine("Добро пожаловать в игру");
-                Console.WriteLine("Суть игры дать другому по ебалу");
+                WritingInConsole.SayingHelloInConsole();
 
                 int kolichestvo;
                 kolichestvo = 2;
@@ -28,7 +27,7 @@ namespace PizdilovoGame
                 VvodChisla vvodChisla = new VvodChisla();                
                 for (int i = 0; i < kolichestvo; i++)
                 {
-                    Console.WriteLine("Выберите персонажа \n Elf - 1 \n Ork -2 \n Human - 3");
+                    WritingInConsole.TextWithChoosingRassi();
                     vvodChisla.Vvod(3);
                     int personazh = vvodChisla.number;
                     _players[i] = choosingRassaNameWeaponLogic.SozdaniePersonozha(personazh);
@@ -44,8 +43,7 @@ namespace PizdilovoGame
                     player.HpAndManaChanged += CheckIfGameEnded;
                 }
 
-                Console.WriteLine("Драка Начинается");        
-                Console.WriteLine("Кто проиграет тот лох");
+                WritingInConsole.StartingFightText();
 
                 int nomer = random.Next(0, kolichestvo);
                 IPlayer currentChamp = _players[nomer];
@@ -60,7 +58,7 @@ namespace PizdilovoGame
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Произошло что-то непредвиденное и программа дальше работать не будет. Смотрите логи в папке {Environment.SpecialFolder.ApplicationData}");
+                WritingInConsole.MessageWithExceptionBeforCloseProgram();
                 workWithFileLogic.WritingFile(ex.Message, ex.StackTrace);
                 throw;
             }
@@ -75,12 +73,12 @@ namespace PizdilovoGame
             {
                 if (currentChamp.HP > anotherChamp.HP)
                 {
-                    Console.WriteLine($"Выиграл {currentChamp} c {currentChamp.HP} хп");
+                    WritingInConsole.WhoWinText(currentChamp);
                     Environment.Exit(0);
                 }
                 else
                 {
-                    Console.WriteLine($"Выиграл {anotherChamp} c {anotherChamp.HP} хп");
+                    WritingInConsole.WhoWinText(anotherChamp);
                     Environment.Exit(0);
                 }
             }
@@ -88,7 +86,7 @@ namespace PizdilovoGame
 
         public static IWeapon ChooseWeapon()
             {
-                Console.WriteLine("Выберите оружие \n Axe - 1 \n Sword -2 \n Shield - 3");
+                WritingInConsole.TakingWeaponText();
                 VvodChisla vvodChisla = new VvodChisla();
                 vvodChisla.Vvod(3);
 
