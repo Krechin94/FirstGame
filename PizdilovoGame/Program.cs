@@ -33,7 +33,6 @@ namespace PizdilovoGame
                     int personazh = vvodChisla.number;
                     _players[i] = choosingRassaNameWeaponLogic.SozdaniePersonozha(personazh);
                     _players[i].Equip(ChooseWeapon());
-
                     Console.Clear();
                 }
 
@@ -42,6 +41,7 @@ namespace PizdilovoGame
                 {
                     player.HpAndManaChanged += playerManager.PrintInfo;
                     player.HpAndManaChanged += CheckIfGameEnded;
+                    SavingPlayers.ChekingFile(player);
                 }
 
                 Console.WriteLine("Драка Начинается");        
