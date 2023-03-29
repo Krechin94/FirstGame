@@ -2,6 +2,7 @@
 using PizdilovoGame.Rassi;
 using System;
 using PizdilovoGame.GameLogic;
+using System.Collections.Generic;
 
 namespace PizdilovoGame
 {
@@ -19,6 +20,7 @@ namespace PizdilovoGame
             workWithFileLogic.CheckingAndCreatingDirectory();
             try
             {
+                SavingPlayers.ChekingFile();
                 Console.WriteLine("Добро пожаловать в игру");
                 Console.WriteLine("Суть игры дать другому по ебалу");
 
@@ -35,13 +37,14 @@ namespace PizdilovoGame
                     _players[i].Equip(ChooseWeapon());
                     Console.Clear();
                 }
-
+                List<Player> listofPlayers = new List<Player>();
                 var playerManager = new PlayerInfoManager(_players[0], _players[1]);
                 foreach (Player player in _players)
                 {
+                    listofPlayers.Add(player);
                     player.HpAndManaChanged += playerManager.PrintInfo;
                     player.HpAndManaChanged += CheckIfGameEnded;
-                    SavingPlayers.ChekingFile(player);
+                    SavingPlayers.SavingAndLoadingPlayers(player);
                 }
 
                 Console.WriteLine("Драка Начинается");        
@@ -57,6 +60,7 @@ namespace PizdilovoGame
                     anotherChamp.Udar(currentChamp);
                 }
                 while (currentChamp.HP > 0 && anotherChamp.HP > 0);
+                SavingPlayers.Serealization(listofPlayers);
             }
             catch (Exception ex)
             {

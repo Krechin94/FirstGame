@@ -12,39 +12,40 @@ namespace PizdilovoGame.GameLogic
 {
     internal static class SavingPlayers
     {
-        public static void ChekingFile(Player player) 
+        private static string _pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        public static void ChekingFile()
         {
-            string pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            if (File.Exists($"{pathToAppData}\\PizdilovoGame\\person.json") == false)
+            List<Player> list = new List<Player>();
+            if (File.Exists($"{_pathToAppData}\\PizdilovoGame\\person.json") == false)
             {
-                var mylist = new List<Player>();
-                mylist.Add(player);
-                var serializedPerson1 = JsonSerializer.Serialize(mylist);
-                File.AppendAllText($"{pathToAppData}\\PizdilovoGame\\person.json", serializedPerson1);
+                var serializedPerson1 = JsonSerializer.Serialize(list);
+                File.WriteAllText($"{_pathToAppData}\\PizdilovoGame\\person.json", serializedPerson1);
             }
-            else
+        }
+
+        public static void Serealization(List<Player> myList)
+        {
+            var serializedPerson = JsonSerializer.Serialize(myList);
+            File.WriteAllText($"{_pathToAppData}\\PizdilovoGame\\person.json", serializedPerson);
+        }
+
+        public static List<Player> Deserialization()
+        {
+            var textPerson = File.ReadAllText($"{_pathToAppData}\\PizdilovoGame\\person.json");
+            List<Player> deserializedPerson = JsonSerializer.Deserialize<List<Player>>(textPerson);
+            return deserializedPerson;
+        }
+
+        public static void SavingAndLoadingPlayers(Player player)
+        {
+            List<Player> list = new List<Player>();
+            list = Deserialization();
+            foreach (Player myPlayer in list)
             {
-                var textPerson = File.ReadAllText($"{pathToAppData}\\PizdilovoGame\\person.json");
-                List<Player> deserializedPerson = JsonSerializer.Deserialize<List<Player>>(textPerson);
-                foreach (var deserializedPerson2 in deserializedPerson)
+                if(myPlayer.Name == player.Name)
                 {
-                    if (deserializedPerson2.Name == player.Name)
-                    {
-                        player = deserializedPerson2;
-                        Console.WriteLine($"А ты оказывается уже играл-------------Загружаю имя игрока {player.Name}");
-                        Thread.Sleep(2000);
-                    }
-                    else
-                    {
-                        
-                        /*var serializedPerson1 = JsonSerializer.Serialize(mylist);
-                        File.AppendAllText($"{pathToAppData}\\PizdilovoGame\\person.json", serializedPerson1);*/
-                        Console.WriteLine("игрок добавлен в файл");
-                    }
+                    player = myPlayer;
                 }
-                deserializedPerson.Add(player);
-                var serializedPerson1 = JsonSerializer.Serialize(deserializedPerson);
-                File.AppendAllText($"{pathToAppData}\\PizdilovoGame\\person.json", serializedPerson1);
             }
         }
     }
