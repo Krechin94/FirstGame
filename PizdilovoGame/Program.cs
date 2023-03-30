@@ -3,6 +3,7 @@ using PizdilovoGame.Rassi;
 using System;
 using PizdilovoGame.GameLogic;
 using System.Collections.Generic;
+using System.IO;
 
 namespace PizdilovoGame
 {
@@ -20,6 +21,7 @@ namespace PizdilovoGame
             workWithFileLogic.CheckingAndCreatingDirectory();
             try
             {
+                
                 SavingPlayers.ChekingFile();
                 Console.WriteLine("Добро пожаловать в игру");
                 Console.WriteLine("Суть игры дать другому по ебалу");
@@ -37,14 +39,26 @@ namespace PizdilovoGame
                     _players[i].Equip(ChooseWeapon());
                     Console.Clear();
                 }
+
+                List<Player> listofPlayersFromFile = SavingPlayers.Deserialization();
+                SavingPlayers.DeleteFile();
                 List<Player> listofPlayers = new List<Player>();
                 var playerManager = new PlayerInfoManager(_players[0], _players[1]);
                 foreach (Player player in _players)
                 {
-                    listofPlayers.Add(player);
                     player.HpAndManaChanged += playerManager.PrintInfo;
                     player.HpAndManaChanged += CheckIfGameEnded;
-                    SavingPlayers.SavingAndLoadingPlayers(player);
+                    listofPlayers.Add(player);
+                }
+                for(int i = 0; i < listofPlayers.Count; i++)
+                {
+                    listofPlayers[i] = SravneniePersov(listofPlayers, listofPlayersFromFile);
+                }
+
+                for(int j = 0; j < listofPlayers.Count; j++)
+                {
+                    _players[j] = listofPlayers[j];
+                    listofPlayersFromFile.Add(listofPlayers[j]);
                 }
 
                 Console.WriteLine("Драка Начинается");        
@@ -53,6 +67,7 @@ namespace PizdilovoGame
                 int nomer = random.Next(0, kolichestvo);
                 IPlayer currentChamp = _players[nomer];
                 IPlayer anotherChamp = nomer == 0 ? _players[1] : _players[0];
+                SavingPlayers.Serealization(listofPlayersFromFile);
 
                 do
                 {
@@ -60,12 +75,12 @@ namespace PizdilovoGame
                     anotherChamp.Udar(currentChamp);
                 }
                 while (currentChamp.HP > 0 && anotherChamp.HP > 0);
-                SavingPlayers.Serealization(listofPlayers);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Произошло что-то непредвиденное и программа дальше работать не будет. Смотрите логи в папке {Environment.SpecialFolder.ApplicationData}");
                 workWithFileLogic.WritingFile(ex.Message, ex.StackTrace);
+                
                 throw;
             }
          }
@@ -78,7 +93,7 @@ namespace PizdilovoGame
             if (currentChamp.HP <= 0 || anotherChamp.HP <= 0)
             {
                 if (currentChamp.HP > anotherChamp.HP)
-                {
+                {;
                     Console.WriteLine($"Выиграл {currentChamp} c {currentChamp.HP} хп");
                     Environment.Exit(0);
                 }
@@ -91,40 +106,60 @@ namespace PizdilovoGame
         }
 
         public static IWeapon ChooseWeapon()
+        {
+            Console.WriteLine("Выберите оружие \n Axe - 1 \n Sword -2 \n Shield - 3");
+            VvodChisla vvodChisla = new VvodChisla();
+            vvodChisla.Vvod(3);
+
+            int personazh = vvodChisla.number;
+
+            IWeapon chosenWeapon;
+            switch (personazh)
             {
-                Console.WriteLine("Выберите оружие \n Axe - 1 \n Sword -2 \n Shield - 3");
-                VvodChisla vvodChisla = new VvodChisla();
-                vvodChisla.Vvod(3);
+                case 1:
+                    {
+                        chosenWeapon = new Axe();
+                        break;
+                    }
+                case 2:
+                    {
+                        chosenWeapon = new Sword();
+                        break;
+                    }
+                case 3:
+                    {
+                        chosenWeapon = new Shield();
+                        break;
+                    }
+                default:
+                    {
+                        chosenWeapon = null;
+                        break;
+                    }
 
-                int personazh = vvodChisla.number;
-
-                IWeapon chosenWeapon;
-                switch (personazh)
-                {
-                    case 1:
-                        {
-                            chosenWeapon = new Axe();
-                            break;
-                        }
-                    case 2:
-                        {
-                            chosenWeapon = new Sword();
-                            break;
-                        }
-                    case 3:
-                        {
-                            chosenWeapon = new Shield();
-                            break;
-                        }
-                    default:
-                        {
-                            chosenWeapon = null;
-                            break;
-                        }
-
-                }
-
-                return chosenWeapon;
             }
+
+            return chosenWeapon;
+        }
+
+        public static Player SravneniePersov(List<Player> list, List<Player> listFromFile)
+        {
+            Player pers = new Player();
+            foreach(Player player in listFromFile)
+            {
+                foreach(Player player1 in list)
+                {
+                    if (player1.Name == player.Name)
+                    {
+                        pers = player;
+                    }
+                    else
+                    {
+                        pers = player1;
+                    }
+                }
+            }
+            return pers;
+        }
     }
 }
