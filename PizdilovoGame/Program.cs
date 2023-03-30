@@ -26,40 +26,26 @@ namespace PizdilovoGame
                 Console.WriteLine("Добро пожаловать в игру");
                 Console.WriteLine("Суть игры дать другому по ебалу");
 
+                List<Player> listofPlayersFromFile = SavingPlayers.Deserialization();
                 int kolichestvo;
                 kolichestvo = 2;
                 _players = new IPlayer[kolichestvo];
                 VvodChisla vvodChisla = new VvodChisla();                
                 for (int i = 0; i < kolichestvo; i++)
                 {
-                    Console.WriteLine("Выберите персонажа \n Elf - 1 \n Ork -2 \n Human - 3");
-                    vvodChisla.Vvod(3);
-                    int personazh = vvodChisla.number;
-                    _players[i] = choosingRassaNameWeaponLogic.SozdaniePersonozha(personazh);
+                    _players[i] = choosingRassaNameWeaponLogic.CreatingOrDownloadingPlayer(listofPlayersFromFile);
                     _players[i].Equip(ChooseWeapon());
                     Console.Clear();
                 }
 
-                List<Player> listofPlayersFromFile = SavingPlayers.Deserialization();
-                SavingPlayers.DeleteFile();
                 List<Player> listofPlayers = new List<Player>();
                 var playerManager = new PlayerInfoManager(_players[0], _players[1]);
                 foreach (Player player in _players)
                 {
                     player.HpAndManaChanged += playerManager.PrintInfo;
                     player.HpAndManaChanged += CheckIfGameEnded;
-                    listofPlayers.Add(player);
+                    listofPlayersFromFile.Add(player);
                 }
-                /*for(int i = 0; i < listofPlayers.Count; i++)
-                {
-                    listofPlayers[i] = SravneniePersov(listofPlayers, listofPlayersFromFile);
-                }
-
-                for(int j = 0; j < listofPlayers.Count; j++)
-                {
-                    _players[j] = listofPlayers[j];
-                    listofPlayersFromFile.Add(listofPlayers[j]);
-                }*/
 
                 Console.WriteLine("Драка Начинается");        
                 Console.WriteLine("Кто проиграет тот лох");
@@ -140,26 +126,6 @@ namespace PizdilovoGame
             }
 
             return chosenWeapon;
-        }
-
-        public static Player SravneniePersov(List<Player> list, List<Player> listFromFile)
-        {
-            Player pers = new Player();
-            foreach(Player player in listFromFile)
-            {
-                foreach(Player player1 in list)
-                {
-                    if (player1.Name == player.Name)
-                    {
-                        pers = player;
-                    }
-                    else
-                    {
-                        pers = player1;
-                    }
-                }
-            }
-            return pers;
         }
     }
 }

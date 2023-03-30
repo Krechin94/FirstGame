@@ -1,12 +1,7 @@
-﻿using PizdilovoGame.Rassi;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace PizdilovoGame.GameLogic
 {
@@ -34,24 +29,6 @@ namespace PizdilovoGame.GameLogic
             var textPerson = File.ReadAllText($"{_pathToAppData}\\PizdilovoGame\\person.json");
             List<Player> deserializedPerson = JsonSerializer.Deserialize<List<Player>>(textPerson);
             return deserializedPerson;
-        }
-
-        public static void SavingAndLoadingPlayers(Player player)
-        {
-            List<Player> list = new List<Player>();
-            list = Deserialization();
-            foreach (Player myPlayer in list)
-            {
-                if(myPlayer.Name == player.Name)
-                {
-                    player = myPlayer;
-                }
-            }
-        }
-
-        public static void DeleteFile()
-        {
-            File.Delete($"{_pathToAppData}\\PizdilovoGame\\person.json");
         }
     }
 }
