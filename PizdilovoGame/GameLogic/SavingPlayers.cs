@@ -16,22 +16,22 @@ namespace PizdilovoGame.GameLogic
         public static void ChekingFile()
         {
             List<Player> list = new List<Player>();
-            if (File.Exists($"{_pathToAppData}\\PizdilovoGame\\person11.txt") == false)
+            if (File.Exists($"{_pathToAppData}\\PizdilovoGame\\person.json") == false)
             {
                 var serializedPerson1 = JsonSerializer.Serialize(list);
-                File.WriteAllText($"{_pathToAppData}\\PizdilovoGame\\person11.txt", serializedPerson1);
+                File.WriteAllText($"{_pathToAppData}\\PizdilovoGame\\person.json", serializedPerson1);
             }
         }
 
         public static void Serealization(List<Player> myList)
         {
             var serializedPerson = JsonSerializer.Serialize(myList);
-            File.AppendAllText($"{_pathToAppData}\\PizdilovoGame\\person11.txt", serializedPerson);
+            File.WriteAllText($"{_pathToAppData}\\PizdilovoGame\\person.json", serializedPerson);
         }
 
         public static List<Player> Deserialization()
         {
-            var textPerson = File.ReadAllText($"{_pathToAppData}\\PizdilovoGame\\person11.txt");
+            var textPerson = File.ReadAllText($"{_pathToAppData}\\PizdilovoGame\\person.json");
             List<Player> deserializedPerson = JsonSerializer.Deserialize<List<Player>>(textPerson);
             return deserializedPerson;
         }
@@ -48,9 +48,10 @@ namespace PizdilovoGame.GameLogic
                 }
             }
         }
+
         public static void DeleteFile()
         {
-            File.Delete($"{_pathToAppData}\\PizdilovoGame\\person11.txt");
+            File.Delete($"{_pathToAppData}\\PizdilovoGame\\person.json");
         }
     }
 }

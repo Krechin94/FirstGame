@@ -50,7 +50,7 @@ namespace PizdilovoGame
                     player.HpAndManaChanged += CheckIfGameEnded;
                     listofPlayers.Add(player);
                 }
-                for(int i = 0; i < listofPlayers.Count; i++)
+                /*for(int i = 0; i < listofPlayers.Count; i++)
                 {
                     listofPlayers[i] = SravneniePersov(listofPlayers, listofPlayersFromFile);
                 }
@@ -59,7 +59,7 @@ namespace PizdilovoGame
                 {
                     _players[j] = listofPlayers[j];
                     listofPlayersFromFile.Add(listofPlayers[j]);
-                }
+                }*/
 
                 Console.WriteLine("Драка Начинается");        
                 Console.WriteLine("Кто проиграет тот лох");
