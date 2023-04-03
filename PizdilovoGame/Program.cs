@@ -33,8 +33,11 @@ namespace PizdilovoGame
                 VvodChisla vvodChisla = new VvodChisla();                
                 for (int i = 0; i < kolichestvo; i++)
                 {
-                    _players[i] = choosingRassaNameWeaponLogic.CreatingOrDownloadingPlayer(listofPlayersFromFile);
-                    _players[i].Equip(ChooseWeapon());
+                    var player = choosingRassaNameWeaponLogic.CreatingOrDownloadingPlayer(listofPlayersFromFile);
+                    player.Equip(ChooseWeapon());
+                    if(!listofPlayersFromFile.Contains(player))
+                        listofPlayersFromFile.Add(player);
+                    _players[i] = player;
                     Console.Clear();
                 }
 
@@ -44,7 +47,6 @@ namespace PizdilovoGame
                 {
                     player.HpAndManaChanged += playerManager.PrintInfo;
                     player.HpAndManaChanged += CheckIfGameEnded;
-                    listofPlayersFromFile.Add(player);
                 }
 
                 Console.WriteLine("Драка Начинается");        
@@ -53,7 +55,6 @@ namespace PizdilovoGame
                 int nomer = random.Next(0, kolichestvo);
                 IPlayer currentChamp = _players[nomer];
                 IPlayer anotherChamp = nomer == 0 ? _players[1] : _players[0];
-                SavingPlayers.Serealization(listofPlayersFromFile);
 
                 do
                 {
@@ -61,6 +62,8 @@ namespace PizdilovoGame
                     anotherChamp.Udar(currentChamp);
                 }
                 while (currentChamp.HP > 0 && anotherChamp.HP > 0);
+
+                SavingPlayers.Serealization(listofPlayersFromFile);
             }
             catch (Exception ex)
             {
@@ -81,12 +84,10 @@ namespace PizdilovoGame
                 if (currentChamp.HP > anotherChamp.HP)
                 {;
                     Console.WriteLine($"Выиграл {currentChamp} c {currentChamp.HP} хп");
-                    Environment.Exit(0);
                 }
                 else
                 {
                     Console.WriteLine($"Выиграл {anotherChamp} c {anotherChamp.HP} хп");
-                    Environment.Exit(0);
                 }
             }
         }
