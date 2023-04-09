@@ -1,11 +1,16 @@
 ﻿using PizdilovoGame.Buffs;
+using PizdilovoGame.Exceptions;
 using PizdilovoGame.GameLogic;
 using PizdilovoGame.Rassi;
 using PizdilovoGame.Weapons;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Timers;
+using Timer = System.Timers.Timer;
 
 namespace PizdilovoGame
 {
@@ -18,6 +23,10 @@ namespace PizdilovoGame
         private readonly VvodChisla _vvodChisla = new VvodChisla();
         private const int MaxMana = 10;
         private const int MinMana = 0;
+        private int sec;
+        private int kuda;
+        private CancellationTokenSource _readLineCancellation = new CancellationTokenSource();
+        private Timer _readLineTimer;
 
         public event Action HpAndManaChanged;
 
@@ -61,44 +70,65 @@ namespace PizdilovoGame
             new WetWilly(),
         };
 
-        public void Udar(IPlayer enemy)
+        public Player()
         {
-                List<IBuffs> list = ChekingBuffsForYou(allBuffsOfPlayers, this, enemy);
-                Console.SetCursorPosition(0, 3);
-                ViborBuffs(list, this, enemy);
-                Console.WriteLine($"Сейчас бьет {Name}");
-                Console.WriteLine("Куда бить 1 - голова, 2 - туловище, 3 - ноги");
-                _vvodChisla.Vvod(3);
-                Console.Clear();
-                var kuda = _vvodChisla.number;
-                switch (kuda)
-                {
-                    case 1:
-                        {
-                            int a = _random.Next(1, 10);
-                            enemy.HP = enemy.HP - a;
-                            this.Mana++;
-                            Console.WriteLine($" ты наносишь {a} урона");
-                            break;
-                        }
-                    case 2:
-                        {
-                            int b = _random.Next(3, 6);
-                            enemy.HP = enemy.HP - b;
-                            this.Mana++;
-                            Console.WriteLine($" ты наносишь {b} урона");
-                            break;
-                        }
-                    case 3:
-                        {
-                            enemy.HP = enemy.HP - 4;
-                            this.Mana++;
-                            Console.WriteLine($" ты наносишь 4 урона");
-                            break;
-                        }
-                }
+            _readLineTimer = new Timer(1000);
+            _readLineTimer.Elapsed += Message;
+        }
 
-                ProverkaNaCombo(kuda);
+        public async void Udar(IPlayer enemy)
+        {
+            List<IBuffs> list = ChekingBuffsForYou(allBuffsOfPlayers, this, enemy);
+            ViborBuffs(list, this, enemy);
+            Console.WriteLine($"Сейчас бьет {Name}");
+            kuda = 0;
+            sec = 3;
+            Show(sec);
+            Console.WriteLine("Куда бить 1 - голова, 2 - туловище, 3 - ноги");
+
+            // trigger hp and mana info printing
+            HpAndManaChanged();
+            Console.SetCursorPosition(0, 3);
+
+            kuda =  ChooseAttackType();
+
+            _readLineCancellation = new CancellationTokenSource();
+            _readLineTimer.Stop(); 
+            Console.Clear();
+
+            switch (kuda)
+            {
+                case 1:
+                    {
+                        int a = _random.Next(1, 10);
+                        enemy.HP = enemy.HP - a;
+                        this.Mana++;
+                        Console.WriteLine($" ты наносишь {a} урона");
+                        break;
+                    }
+                case 2:
+                    {
+                        int b = _random.Next(3, 6);
+                        enemy.HP = enemy.HP - b;
+                        this.Mana++;
+                        Console.WriteLine($" ты наносишь {b} урона");
+                        break;
+                    }
+                case 3:
+                    {
+                        int c = 4;
+                        enemy.HP = enemy.HP - c;
+                        this.Mana++;
+                        Console.WriteLine($" ты наносишь 4 урона");
+                        break;
+                    }
+                case 4:
+                    {
+                        Console.WriteLine($" ты пропустил свой удар");
+                        break;
+                    }
+            }
+            ProverkaNaCombo(kuda);
         }
 
         public void Equip(IWeapon weapon)
@@ -124,7 +154,6 @@ namespace PizdilovoGame
             if (_combo.SequenceEqual(_comboHitQueue))
             {
                 Console.WriteLine("Тебе повезло, ты открыл супер удар, поэтому бьешь еще раз");
-                Thread.Sleep(2000);
                 this.HP = this.HP + kudaYdaril * 4;
             }
         }
@@ -169,6 +198,52 @@ namespace PizdilovoGame
                 buffs[chislo - 1].Activate(player1, player2);
                 Console.Clear();
             }
+        }
+        public void Show(int vremya)
+        {
+            _readLineTimer.Start();
+        }
+
+        private void Message(object sender, ElapsedEventArgs e)
+        {
+            Console.SetCursorPosition(Console.WindowWidth / 2, 0);
+            Console.Write(sec);
+            sec--;
+            Console.SetCursorPosition(0, 5);
+            if (sec < 0)
+            {
+                _readLineCancellation.Cancel();
+                _readLineTimer.Stop();
+            }
+        }
+
+        private int ChooseAttackType()
+        {
+            try
+            {
+                return ReadLineAsync(_readLineCancellation.Token).Result;
+            } 
+            catch (AggregateException tce)
+            {
+                return 4;
+            }
+        }
+
+
+        async Task<int> ReadLineAsync(CancellationToken cancellationToken = default)
+        {
+            var readTask = Task.Run(() =>
+            {
+                _vvodChisla.Vvod(3);
+                return _vvodChisla.number;
+            });
+
+            await Task.WhenAny(readTask, Task.Delay(-1, cancellationToken));
+
+            if (cancellationToken.IsCancellationRequested)
+                throw new WrongUserInputException(3);
+
+            return await readTask;
         }
     }
 }
