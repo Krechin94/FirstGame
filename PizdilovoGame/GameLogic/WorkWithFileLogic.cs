@@ -23,6 +23,10 @@ namespace PizdilovoGame.GameLogic
             {
                 Directory.CreateDirectory($"{pathToAppData}\\PizdilovoGame");
             }
+            if (!Directory.Exists($"{pathToAppData}\\PizdilovoGame\\Saves"))
+            {
+                Directory.CreateDirectory($"{pathToAppData}\\PizdilovoGame\\Saves");
+            }
         }
     }
 }

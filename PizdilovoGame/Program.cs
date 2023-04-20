@@ -3,7 +3,6 @@ using PizdilovoGame.Rassi;
 using System;
 using PizdilovoGame.GameLogic;
 using System.Collections.Generic;
-using System.IO;
 
 namespace PizdilovoGame
 {
@@ -21,22 +20,17 @@ namespace PizdilovoGame
             workWithFileLogic.CheckingAndCreatingDirectory();
             try
             {
-                
-                SavingPlayers.ChekingFile();
                 Console.WriteLine("Добро пожаловать в игру");
                 Console.WriteLine("Суть игры дать другому по ебалу");
 
-                List<Player> listofPlayersFromFile = SavingPlayers.Deserialization();
                 int kolichestvo;
                 kolichestvo = 2;
                 _players = new IPlayer[kolichestvo];
                 VvodChisla vvodChisla = new VvodChisla();                
                 for (int i = 0; i < kolichestvo; i++)
                 {
-                    var player = choosingRassaNameWeaponLogic.CreatingOrDownloadingPlayer(listofPlayersFromFile);
+                    var player = choosingRassaNameWeaponLogic.CreatingOrDownloadingPlayer();
                     player.Equip(ChooseWeapon());
-                    if(!listofPlayersFromFile.Contains(player))
-                        listofPlayersFromFile.Add(player);
                     _players[i] = player;
                     Console.Clear();
                 }
@@ -63,7 +57,8 @@ namespace PizdilovoGame
                 }
                 while (currentChamp.HP > 0 && anotherChamp.HP > 0);
 
-                SavingPlayers.Serealization(listofPlayersFromFile);
+                SavingPlayers.Serealization(anotherChamp);
+                SavingPlayers.Serealization(currentChamp);
             }
             catch (Exception ex)
             {
