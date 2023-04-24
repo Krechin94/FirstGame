@@ -8,7 +8,6 @@ namespace PizdilovoGame.GameLogic
         public int chislo;
         public int number;
 
-        WorkWithFileLogic workWithFileLogic = new WorkWithFileLogic();
         public void Vvod(int maxNumber)
         {
             bool qwe = false;
@@ -28,12 +27,12 @@ namespace PizdilovoGame.GameLogic
                 catch (FormatException ex)
                 {
                     Console.WriteLine("Не вводи буквы попробуй ввести еще раз");
-                    workWithFileLogic.WritingFile(ex.Message, ex.StackTrace);
+                    WorkWithFileLogic.WritingFile(ex.Message, ex.StackTrace);
                 }
                 catch (WrongUserInputException wuie)
                 {
                     Console.WriteLine(wuie.Message + "\nПопробуй ввести еще раз");
-                    workWithFileLogic.WritingFile(wuie.Message, wuie.StackTrace);
+                    WorkWithFileLogic.WritingFile(wuie.Message, wuie.StackTrace);
                 }
             }
             while (qwe != true);

@@ -13,11 +13,10 @@ namespace PizdilovoGame
 
         static void Main(string[] args)             
         {
-            WorkWithFileLogic workWithFileLogic = new WorkWithFileLogic();
             WritingInfoInConsole writingInfoInConsole = new WritingInfoInConsole();
             PlayerCreator choosingRassaNameWeaponLogic = new PlayerCreator();
 
-            workWithFileLogic.CheckingAndCreatingDirectory();
+            WorkWithFileLogic.CheckingAndCreatingDirectory();
             try
             {
                 Console.WriteLine("Добро пожаловать в игру");
@@ -63,7 +62,7 @@ namespace PizdilovoGame
             catch (Exception ex)
             {
                 Console.WriteLine($"Произошло что-то непредвиденное и программа дальше работать не будет. Смотрите логи в папке {Environment.SpecialFolder.ApplicationData}");
-                workWithFileLogic.WritingFile(ex.Message, ex.StackTrace);
+                WorkWithFileLogic.WritingFile(ex.Message, ex.StackTrace);
                 
                 throw;
             }

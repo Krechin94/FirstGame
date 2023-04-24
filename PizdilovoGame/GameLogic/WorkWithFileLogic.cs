@@ -5,9 +5,9 @@ namespace PizdilovoGame.GameLogic
 {
     internal class WorkWithFileLogic
     {
-        public void WritingFile(string exceptionMessage, string placeOfException)
+        public static string pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        public static void WritingFile(string exceptionMessage, string placeOfException)
         {
-            string pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             using (var sw = new StreamWriter($"{pathToAppData}\\PizdilovoGame\\Log.txt", true))
             {
                 sw.WriteLine("ошибка нахуй");
@@ -16,9 +16,8 @@ namespace PizdilovoGame.GameLogic
             }
         }
 
-        public void CheckingAndCreatingDirectory()
+        public static void CheckingAndCreatingDirectory()
         {
-            string pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             if (!Directory.Exists($"{pathToAppData}\\PizdilovoGame"))
             {
                 Directory.CreateDirectory($"{pathToAppData}\\PizdilovoGame");

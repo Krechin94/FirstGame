@@ -8,14 +8,13 @@ namespace PizdilovoGame.GameLogic
 {
     internal static class SavingPlayers
     {
-        private static string _pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
         public static void Serealization(IPlayer player)
         {
-            player.HP = 10;
+            player.HP = 100;
             player.Mana = 0;
             var serializedPerson = JsonSerializer.Serialize(player);
-            File.WriteAllText($"{_pathToAppData}\\PizdilovoGame\\Saves\\{player.Name}.json", serializedPerson);
+            File.WriteAllText($"{WorkWithFileLogic.pathToAppData}\\PizdilovoGame\\Saves\\{player.Name}.json", serializedPerson);
         }
     }
 }

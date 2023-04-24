@@ -16,7 +16,7 @@ namespace PizdilovoGame.GameLogic
             Player player = new Player();
             Console.WriteLine("Введите имя");
             string _name = Console.ReadLine();
-            if (File.Exists($"{_pathToAppData}\\PizdilovoGame\\Saves\\{_name}.json"))
+            if (File.Exists($"{WorkWithFileLogic.pathToAppData}\\PizdilovoGame\\Saves\\{_name}.json"))
             {
                 var textPerson = File.ReadAllText($"{_pathToAppData}\\PizdilovoGame\\Saves\\{_name}.json");
                 Player deserializedPerson = JsonSerializer.Deserialize<Player>(textPerson);
