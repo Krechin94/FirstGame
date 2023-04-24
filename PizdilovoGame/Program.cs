@@ -77,7 +77,7 @@ namespace PizdilovoGame
             if (currentChamp.HP <= 0 || anotherChamp.HP <= 0)
             {
                 if (currentChamp.HP > anotherChamp.HP)
-                {;
+                {
                     Console.WriteLine($"Выиграл {currentChamp} c {currentChamp.HP} хп");
                 }
                 else
