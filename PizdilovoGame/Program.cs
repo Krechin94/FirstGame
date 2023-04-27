@@ -2,7 +2,6 @@
 using PizdilovoGame.Rassi;
 using System;
 using PizdilovoGame.GameLogic;
-using System.Collections.Generic;
 
 namespace PizdilovoGame
 {
@@ -34,7 +33,6 @@ namespace PizdilovoGame
                     Console.Clear();
                 }
 
-                List<Player> listofPlayers = new List<Player>();
                 var playerManager = new PlayerInfoManager(_players[0], _players[1]);
                 foreach (Player player in _players)
                 {
