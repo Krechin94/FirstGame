@@ -129,14 +129,6 @@ namespace PizdilovoGame
             }
         }
 
-        private void ManaNotBigger10 (IPlayer player)
-        {
-            if (player.Mana < 10)
-            {
-                player.Mana++;
-            }
-        }
-
         private List<IBuffs> ChekingBuffsForYou(List<IBuffs> buffs, IPlayer player1, IPlayer player2)
         {
             int i = 0;

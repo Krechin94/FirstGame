@@ -9,8 +9,9 @@ namespace PizdilovoGame.GameLogic
 {
     internal class PlayerCreator
     {
-        VvodChisla vvodChisla = new VvodChisla();
+        VvodChisla _vvodChisla = new VvodChisla();
         private static string _pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
         public Player CreatingOrDownloadingPlayer()
         {
             Player player = new Player();
@@ -27,10 +28,10 @@ namespace PizdilovoGame.GameLogic
             else
             {
                 Console.WriteLine("Выберите персонажа \n Elf - 1 \n Ork -2 \n Human - 3");
-                vvodChisla.Vvod(3);
-                int nomer = vvodChisla.number;
+                _vvodChisla.Vvod(3);
+                int _nomer = _vvodChisla.number;
                 {
-                    switch (nomer)
+                    switch (_nomer)
                     {
                         case 1:
                             {
