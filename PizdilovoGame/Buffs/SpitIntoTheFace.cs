@@ -9,6 +9,7 @@ namespace PizdilovoGame.Buffs
         public int Cost { get; } = 6;
 
         public string Affiliations { get; } = "Ork";
+        public string Description { get; } = "Заклинание 'Плевок в лицо' Доступно только Оркам\nОтнимает у врага 15 здоровья\nСтоит 3 маны";
 
         public void Activate(IPlayer player1, IPlayer player2)
         {

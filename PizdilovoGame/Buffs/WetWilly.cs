@@ -8,6 +8,7 @@ namespace PizdilovoGame.Buffs
 
         public int Cost { get; } = 6;
         public string Affiliations { get; } = "Human";
+        public string Description { get; } = "Заклинание 'Мокрый Вилли' Доступно только Людям\nОтнимает у врага 10 здоровья\nСтоит 3 маны";
 
         public void Activate(IPlayer player1, IPlayer player2)
         {

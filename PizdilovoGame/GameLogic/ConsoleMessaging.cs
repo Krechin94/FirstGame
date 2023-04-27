@@ -1,7 +1,5 @@
 ﻿using PizdilovoGame.Buffs;
-using PizdilovoGame.Rassi;
 using System;
-using System.Threading;
 
 namespace PizdilovoGame.GameLogic
 {
@@ -10,6 +8,23 @@ namespace PizdilovoGame.GameLogic
         public static void ShowMessage(string message )
         {
             Console.WriteLine(message);
+        }
+
+        public static void ShowRules()
+        {
+            Console.Clear();
+            Console.WriteLine("");
+        }
+
+        public static void ShowWeaponInfo()
+        {
+            Console.Clear();
+            Console.WriteLine("");
+        }
+
+        public static void ShowBuffInfo(IBuffs buff)
+        {
+            Console.WriteLine(buff.Description);
         }
     }
 }

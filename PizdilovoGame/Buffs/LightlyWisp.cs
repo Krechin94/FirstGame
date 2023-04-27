@@ -8,6 +8,7 @@ namespace PizdilovoGame.Buffs
         public int Cost { get; } = 6;
 
         public string Affiliations { get; } = "Elf";
+        public string Description { get; } = "Заклинание 'Легкий Пук' Доступно только эльфам\nВосстанавливает 10 здоровья и 3 маны\nСтоит 3 маны";
 
         public void Activate(IPlayer player1, IPlayer player2)
         {
