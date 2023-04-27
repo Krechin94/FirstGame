@@ -24,6 +24,8 @@ namespace PizdilovoGame.GameLogic
                 Console.WriteLine($"персонаж под ником {_name} загружается...");
                 Thread.Sleep(2000);
                 player = deserializedPerson;
+                player.HP = 100;
+                player.Mana = 0;
             }
             else
             {

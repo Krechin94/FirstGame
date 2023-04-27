@@ -11,8 +11,6 @@ namespace PizdilovoGame.GameLogic
 
         public static void Serealization(IPlayer player)
         {
-            player.HP = 100;
-            player.Mana = 0;
             var serializedPerson = JsonSerializer.Serialize(player);
             File.WriteAllText($"{WorkWithFileLogic.pathToAppData}\\PizdilovoGame\\Saves\\{player.Name}.json", serializedPerson);
         }
