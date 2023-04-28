@@ -17,6 +17,7 @@ namespace PizdelovoGame.SavesService.Controllers
         }
 
         [HttpPut]
+        [Route("[action]")]
         public async Task<ActionResult<PlayerDto>> Player([FromBody] PlayerDto player)
         {
             if (player == null)
@@ -38,7 +39,8 @@ namespace PizdelovoGame.SavesService.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<PlayerDto>> Player([FromBody] string name)
+        [Route("[action]")]
+        public async Task<ActionResult<PlayerDto>> Player([FromQuery] string name)
         {
             if (name == null)
                 return BadRequest("Укажите имя игрока.");
