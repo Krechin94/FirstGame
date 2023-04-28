@@ -16,7 +16,7 @@ namespace PizdelovoGame.SavesService
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<FileSaveService>();
-            builder.Services.AddLogging(builder => builder.AddConsole());
+            //builder.Services.AddLogging(builder => builder.AddConsole());
 
             var app = builder.Build();
 
