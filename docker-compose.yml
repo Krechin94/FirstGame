@@ -6,7 +6,6 @@ services:
     stdin_open: true
     ports:
         - "666:80"
-        - "6666:443"
     build:
       context: .
       dockerfile: PizdelovoGame.SavesService/Dockerfile
