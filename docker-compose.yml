@@ -6,8 +6,6 @@ services:
     ports:
         - "666:80"
         - "6666:443"
-    volumes:
-        - ~/.pizdelovo-game:~/.config/.pizdelovo-game 
     build:
       context: .
       dockerfile: PizdelovoGame.SavesService/Dockerfile
