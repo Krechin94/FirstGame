@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33214.272
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizdilovoGame", "PizdilovoGame\PizdilovoGame.csproj", "{C3CE0CF9-3D05-4CAC-A0B4-9DD8E763F731}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizdilovoGame", "PizdilovoGame\PizdilovoGame.csproj", "{C3CE0CF9-3D05-4CAC-A0B4-9DD8E763F731}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizdelovoGame.SavesService", "PizdelovoGame.SavesService\PizdelovoGame.SavesService.csproj", "{9F87EF64-E22A-4E9F-B45B-8237D73D0BAC}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{8195C5BF-F083-4BE6-8495-31D3DFD62CAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{C3CE0CF9-3D05-4CAC-A0B4-9DD8E763F731}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3CE0CF9-3D05-4CAC-A0B4-9DD8E763F731}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3CE0CF9-3D05-4CAC-A0B4-9DD8E763F731}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F87EF64-E22A-4E9F-B45B-8237D73D0BAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F87EF64-E22A-4E9F-B45B-8237D73D0BAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F87EF64-E22A-4E9F-B45B-8237D73D0BAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F87EF64-E22A-4E9F-B45B-8237D73D0BAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8195C5BF-F083-4BE6-8495-31D3DFD62CAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8195C5BF-F083-4BE6-8495-31D3DFD62CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8195C5BF-F083-4BE6-8495-31D3DFD62CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8195C5BF-F083-4BE6-8495-31D3DFD62CAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
