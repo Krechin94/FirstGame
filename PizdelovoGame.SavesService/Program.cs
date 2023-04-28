@@ -13,7 +13,7 @@ namespace PizdelovoGame.SavesService
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
+            //builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<FileSaveService>();
             //builder.Services.AddLogging(builder => builder.AddConsole());
