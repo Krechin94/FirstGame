@@ -1,9 +1,4 @@
 ﻿using PizdilovoGame.Rassi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PizdilovoGame.Buffs
 {
@@ -13,6 +8,7 @@ namespace PizdilovoGame.Buffs
 
         public int Cost { get; } = 6;
         public string Affiliations { get; } = "Human";
+        public string Description { get; } = "Заклинание 'Мокрый Вилли' Доступно только Людям. Отнимает у врага 10 здоровья. Стоит 3 маны";
 
         public void Activate(IPlayer player1, IPlayer player2)
         {

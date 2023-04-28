@@ -5,7 +5,6 @@ using PizdilovoGame.Weapons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 
 namespace PizdilovoGame
 {
@@ -63,42 +62,45 @@ namespace PizdilovoGame
 
         public void Udar(IPlayer enemy)
         {
-                List<IBuffs> list = ChekingBuffsForYou(allBuffsOfPlayers, this, enemy);
-                Console.SetCursorPosition(0, 3);
-                ViborBuffs(list, this, enemy);
-                Console.WriteLine($"Сейчас бьет {Name}");
-                Console.WriteLine("Куда бить 1 - голова, 2 - туловище, 3 - ноги");
-                _vvodChisla.Vvod(3);
-                Console.Clear();
-                var kuda = _vvodChisla.number;
-                switch (kuda)
-                {
-                    case 1:
-                        {
-                            int a = _random.Next(1, 10);
-                            enemy.HP = enemy.HP - a;
-                            this.Mana++;
-                            Console.WriteLine($" ты наносишь {a} урона");
-                            break;
-                        }
-                    case 2:
-                        {
-                            int b = _random.Next(3, 6);
-                            enemy.HP = enemy.HP - b;
-                            this.Mana++;
-                            Console.WriteLine($" ты наносишь {b} урона");
-                            break;
-                        }
-                    case 3:
-                        {
-                            enemy.HP = enemy.HP - 4;
-                            this.Mana++;
-                            Console.WriteLine($" ты наносишь 4 урона");
-                            break;
-                        }
-                }
+            List<IBuffs> list = ChekingBuffsForYou(allBuffsOfPlayers, this, enemy);
+            ConsoleMessaging.ShowBuffInfo(list);
+            Console.SetCursorPosition(0, 3);
+            ViborBuffs(list, this, enemy);
+            ConsoleMessaging.ShowMessage($"Сейчас очередь {Name}\nКуда бить 1 - голова, 2 - туловище, 3 - ноги",0,1);
+            _vvodChisla.Vvod(3);
+            Console.Clear();
+            var kuda = _vvodChisla.number;
+            switch (kuda)
+            {
+                case 1:
+                    {
+                        int a = _random.Next(1, 10);
+                        enemy.HP = enemy.HP - a;
+                        this.Mana++;
+                        Console.SetCursorPosition(0, 0);
+                        ConsoleMessaging.ShowMessage($" ты наносишь {a} урона");
+                        break;
+                    }
+                case 2:
+                    {
+                        int b = _random.Next(3, 6);
+                        enemy.HP = enemy.HP - b;
+                        this.Mana++;
+                        Console.SetCursorPosition(0, 0);
+                        ConsoleMessaging.ShowMessage($" ты наносишь {b} урона");
+                        break;
+                    }
+                case 3:
+                    {
+                        enemy.HP = enemy.HP - 4;
+                        this.Mana++;
+                        Console.SetCursorPosition(0, 0);
+                        ConsoleMessaging.ShowMessage($" ты наносишь {4} урона");
+                        break;
+                    }
+            }
 
-                ProverkaNaCombo(kuda);
+            ProverkaNaCombo(kuda);
         }
 
         public void Equip(IWeapon weapon)
@@ -123,8 +125,7 @@ namespace PizdilovoGame
 
             if (_combo.SequenceEqual(_comboHitQueue))
             {
-                Console.WriteLine("Тебе повезло, ты открыл супер удар, поэтому бьешь еще раз");
-                Thread.Sleep(2000);
+                ConsoleMessaging.ShowMessage($"Тебе повезло, ты открыл супер удар, поэтому тебе восстанавливается {kudaYdaril * 4} здоровья");
                 this.HP = this.HP + kudaYdaril * 4;
             }
         }
@@ -147,9 +148,9 @@ namespace PizdilovoGame
                 {
                     if (player1.Nation == buff.Affiliations || buff.Affiliations =="All")
                     {
-                        string text = $"Заклинание номер - {i+1} {buff.Name}\n";
+                        string text = $"Заклинание номер - {i + 1} {buff.Name}\n";
                         Console.SetCursorPosition((Console.WindowWidth) - text.Length, 4 + i);
-                        Console.WriteLine(text);
+                        ConsoleMessaging.ShowMessage(text);
                         list.Add(buff);
                         i++;
                     }
@@ -163,7 +164,8 @@ namespace PizdilovoGame
             if (buffs.Count > 0)
             {
                 int count = buffs.Count;
-                Console.WriteLine($"Vvedi Chislo ot 1 do {count}");
+                Console.SetCursorPosition(0, 1);
+                ConsoleMessaging.ShowMessage($"Сейчас очередь {Name}\nВыбери бафф, введи число от 1 до {count}");
                 _vvodChisla.Vvod(count);
                 int chislo = _vvodChisla.number;
                 buffs[chislo - 1].Activate(player1, player2);

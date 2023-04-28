@@ -1,9 +1,4 @@
 ﻿using PizdilovoGame.Rassi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PizdilovoGame.Buffs
 {
@@ -14,6 +9,7 @@ namespace PizdilovoGame.Buffs
         public int Cost { get; } = 6;
 
         public string Affiliations { get; } = "Ork";
+        public string Description { get; } = "Заклинание 'Плевок в лицо' Доступно только Оркам. Отнимает у врага 15 здоровья. Стоит 3 маны";
 
         public void Activate(IPlayer player1, IPlayer player2)
         {

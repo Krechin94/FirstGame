@@ -2,6 +2,7 @@
 using PizdilovoGame.Rassi;
 using System;
 using PizdilovoGame.GameLogic;
+using System.Threading;
 
 namespace PizdilovoGame
 {
@@ -19,8 +20,7 @@ namespace PizdilovoGame
             workWithFileLogic.CheckingAndCreatingDirectory();
             try
             {
-                Console.WriteLine("Добро пожаловать в игру");
-                Console.WriteLine("Суть игры дать другому по ебалу");
+                ConsoleMessaging.ShowMessage("Добро пожаловать в игру\nСуть игры дать другому по ебалу",0,0);
 
                 int kolichestvo;
                 kolichestvo = 2;
@@ -28,7 +28,7 @@ namespace PizdilovoGame
                 VvodChisla vvodChisla = new VvodChisla();                
                 for (int i = 0; i < kolichestvo; i++)
                 {
-                    Console.WriteLine("Выберите персонажа \n Elf - 1 \n Ork -2 \n Human - 3");
+                    ConsoleMessaging.ShowMessage("Выберите персонажа \n Elf - 1 \n Ork -2 \n Human - 3");
                     vvodChisla.Vvod(3);
                     int personazh = vvodChisla.number;
                     _players[i] = choosingRassaNameWeaponLogic.SozdaniePersonozha(personazh);
@@ -44,8 +44,9 @@ namespace PizdilovoGame
                     player.HpAndManaChanged += CheckIfGameEnded;
                 }
 
-                Console.WriteLine("Драка Начинается");        
-                Console.WriteLine("Кто проиграет тот лох");
+                ConsoleMessaging.ShowMessage("Драка Начинается\nКто проиграет тот лох");
+                Thread.Sleep(1000);
+                Console.Clear();
 
                 int nomer = random.Next(0, kolichestvo);
                 IPlayer currentChamp = _players[nomer];
@@ -60,7 +61,7 @@ namespace PizdilovoGame
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Произошло что-то непредвиденное и программа дальше работать не будет. Смотрите логи в папке {Environment.SpecialFolder.ApplicationData}");
+                ConsoleMessaging.ShowMessage($"Произошло что-то непредвиденное и программа дальше работать не будет. Смотрите логи в папке {Environment.SpecialFolder.ApplicationData}");
                 workWithFileLogic.WritingFile(ex.Message, ex.StackTrace);
                 throw;
             }
@@ -75,12 +76,12 @@ namespace PizdilovoGame
             {
                 if (currentChamp.HP > anotherChamp.HP)
                 {
-                    Console.WriteLine($"Выиграл {currentChamp} c {currentChamp.HP} хп");
+                    ConsoleMessaging.ShowMessage($"Выиграл {currentChamp} c {currentChamp.HP} хп");
                     Environment.Exit(0);
                 }
                 else
                 {
-                    Console.WriteLine($"Выиграл {anotherChamp} c {anotherChamp.HP} хп");
+                    ConsoleMessaging.ShowMessage($"Выиграл {anotherChamp} c {anotherChamp.HP} хп");
                     Environment.Exit(0);
                 }
             }
@@ -88,7 +89,7 @@ namespace PizdilovoGame
 
         public static IWeapon ChooseWeapon()
             {
-                Console.WriteLine("Выберите оружие \n Axe - 1 \n Sword -2 \n Shield - 3");
+                ConsoleMessaging.ShowMessage("Выберите оружие \n Axe - 1 \n Sword -2 \n Shield - 3");
                 VvodChisla vvodChisla = new VvodChisla();
                 vvodChisla.Vvod(3);
 

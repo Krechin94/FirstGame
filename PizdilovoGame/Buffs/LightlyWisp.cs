@@ -1,9 +1,4 @@
 ﻿using PizdilovoGame.Rassi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PizdilovoGame.Buffs
 {
@@ -13,6 +8,7 @@ namespace PizdilovoGame.Buffs
         public int Cost { get; } = 6;
 
         public string Affiliations { get; } = "Elf";
+        public string Description { get; } = "Заклинание 'Легкий Пук' Доступно только эльфам. Восстанавливает 10 здоровья и 3 маны. Стоит 3 маны";
 
         public void Activate(IPlayer player1, IPlayer player2)
         {
