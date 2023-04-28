@@ -9,13 +9,10 @@ namespace PizdelovoGame.SavesService.Controllers
     [Route("[controller]")]
     public class SaveController : ControllerBase
     {
-        private readonly ILogger<SaveController> _logger;
         private readonly FileSaveService _fileSaveService;
 
-        public SaveController(ILogger<SaveController> logger,
-            FileSaveService fileSaveService)
+        public SaveController(FileSaveService fileSaveService)
         {
-            _logger = logger;
             _fileSaveService = fileSaveService;
         }
 
