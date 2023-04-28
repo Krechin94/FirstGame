@@ -63,6 +63,7 @@ namespace PizdilovoGame
         public void Udar(IPlayer enemy)
         {
             List<IBuffs> list = ChekingBuffsForYou(allBuffsOfPlayers, this, enemy);
+            ConsoleMessaging.ShowBuffInfo(list);
             Console.SetCursorPosition(0, 3);
             ViborBuffs(list, this, enemy);
             Console.SetCursorPosition(0, 1);

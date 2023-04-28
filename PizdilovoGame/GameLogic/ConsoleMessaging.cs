@@ -1,5 +1,6 @@
 ﻿using PizdilovoGame.Buffs;
 using System;
+using System.Collections.Generic;
 
 namespace PizdilovoGame.GameLogic
 {
@@ -22,9 +23,15 @@ namespace PizdilovoGame.GameLogic
             Console.WriteLine("");
         }
 
-        public static void ShowBuffInfo(IBuffs buff)
+        public static void ShowBuffInfo(List<IBuffs> buffs)
         {
-            Console.WriteLine(buff.Description);
+            int i = 0;
+            foreach (IBuffs buff in buffs)
+            {
+                Console.SetCursorPosition(0, 7 + i);
+                Console.WriteLine(buff.Description);
+                i++;
+            }
         }
     }
 }
