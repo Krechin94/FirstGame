@@ -5,8 +5,14 @@ namespace PizdilovoGame.GameLogic
 {
     internal static class ConsoleMessaging
     {
-        public static void ShowMessage(string message )
+        public static void ShowInfo(string message)
         {
+            ShowMessage(message, 0,5 );
+        }
+
+        public static void ShowMessage(string message,int _xCoordinate=0, int _yCoordinate=0 )
+        {
+            Console.SetCursorPosition(_xCoordinate, _yCoordinate);
             Console.WriteLine(message);
         }
 

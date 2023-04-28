@@ -65,8 +65,7 @@ namespace PizdilovoGame
             List<IBuffs> list = ChekingBuffsForYou(allBuffsOfPlayers, this, enemy);
             Console.SetCursorPosition(0, 3);
             ViborBuffs(list, this, enemy);
-            Console.SetCursorPosition(0, 1);
-            ConsoleMessaging.ShowMessage($"Сейчас очередь {Name}\nКуда бить 1 - голова, 2 - туловище, 3 - ноги");
+            ConsoleMessaging.ShowMessage($"Сейчас очередь {Name}\nКуда бить 1 - голова, 2 - туловище, 3 - ноги",0,1);
             _vvodChisla.Vvod(3);
             Console.Clear();
             var kuda = _vvodChisla.number;

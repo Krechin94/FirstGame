@@ -20,7 +20,7 @@ namespace PizdilovoGame
             workWithFileLogic.CheckingAndCreatingDirectory();
             try
             {
-                ConsoleMessaging.ShowMessage("Добро пожаловать в игру\nСуть игры дать другому по ебалу");
+                ConsoleMessaging.ShowMessage("Добро пожаловать в игру\nСуть игры дать другому по ебалу",0,0);
 
                 int kolichestvo;
                 kolichestvo = 2;
