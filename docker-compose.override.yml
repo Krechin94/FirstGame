@@ -13,4 +13,4 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-      - ./source/certificate/wombat-home.pfx:/root/.aspnet/server.pfx:ro
+      - ./source/certificate/wombat-home.pfx:/root/.aspnet/server.pfx:Z
