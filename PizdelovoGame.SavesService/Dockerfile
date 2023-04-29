@@ -14,7 +14,7 @@ RUN dotnet build "PizdelovoGame.SavesService.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "PizdelovoGame.SavesService.csproj" -c Release -o /app/publish /p:UseAppHost=false
-RUN dotnet dev-certs https -ep ./server.pfx -p 6464
+RUN dotnet dev-certs https -ep /root/.aspnet/server.pfx -p 6464
 
 FROM base AS final
 WORKDIR /app
