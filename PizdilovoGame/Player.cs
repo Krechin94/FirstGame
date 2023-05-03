@@ -64,11 +64,10 @@ namespace PizdilovoGame
         {
             List<IBuffs> list = ChekingBuffsForYou(allBuffsOfPlayers, this, enemy);
             ConsoleMessaging.ShowBuffInfo(list);
-            Console.SetCursorPosition(0, 3);
             ViborBuffs(list, this, enemy);
-            ConsoleMessaging.ShowMessage($"Сейчас очередь {Name}\nКуда бить 1 - голова, 2 - туловище, 3 - ноги",0,1);
+            ConsoleMessaging.ShowFightingMessage($"Сейчас очередь {Name}\nКуда бить 1 - голова, 2 - туловище, 3 - ноги");
             _vvodChisla.Vvod(3);
-            Console.Clear();
+            ConsoleMessaging.ConsoleClear();
             var kuda = _vvodChisla.number;
             switch (kuda)
             {
@@ -78,7 +77,7 @@ namespace PizdilovoGame
                         enemy.HP = enemy.HP - a;
                         this.Mana++;
                         Console.SetCursorPosition(0, 0);
-                        ConsoleMessaging.ShowMessage($" ты наносишь {a} урона");
+                        ConsoleMessaging.ShowMessageCursor00($" ты наносишь {a} урона");
                         break;
                     }
                 case 2:
@@ -87,7 +86,7 @@ namespace PizdilovoGame
                         enemy.HP = enemy.HP - b;
                         this.Mana++;
                         Console.SetCursorPosition(0, 0);
-                        ConsoleMessaging.ShowMessage($" ты наносишь {b} урона");
+                        ConsoleMessaging.ShowMessageCursor00($" ты наносишь {b} урона");
                         break;
                     }
                 case 3:
@@ -95,7 +94,7 @@ namespace PizdilovoGame
                         enemy.HP = enemy.HP - 4;
                         this.Mana++;
                         Console.SetCursorPosition(0, 0);
-                        ConsoleMessaging.ShowMessage($" ты наносишь {4} урона");
+                        ConsoleMessaging.ShowMessageCursor00($" ты наносишь {4} урона");
                         break;
                     }
             }
@@ -125,7 +124,7 @@ namespace PizdilovoGame
 
             if (_combo.SequenceEqual(_comboHitQueue))
             {
-                ConsoleMessaging.ShowMessage($"Тебе повезло, ты открыл супер удар, поэтому тебе восстанавливается {kudaYdaril * 4} здоровья");
+                ConsoleMessaging.SuperUdarMessage($"Тебе повезло, ты открыл супер удар, поэтому тебе восстанавливается {kudaYdaril * 4} здоровья");
                 this.HP = this.HP + kudaYdaril * 4;
             }
         }
@@ -149,8 +148,7 @@ namespace PizdilovoGame
                     if (player1.Nation == buff.Affiliations || buff.Affiliations =="All")
                     {
                         string text = $"Заклинание номер - {i + 1} {buff.Name}\n";
-                        Console.SetCursorPosition((Console.WindowWidth) - text.Length, 4 + i);
-                        ConsoleMessaging.ShowMessage(text);
+                        ConsoleMessaging.ShowBuffMessage(text,i);
                         list.Add(buff);
                         i++;
                     }
@@ -164,8 +162,7 @@ namespace PizdilovoGame
             if (buffs.Count > 0)
             {
                 int count = buffs.Count;
-                Console.SetCursorPosition(0, 1);
-                ConsoleMessaging.ShowMessage($"Сейчас очередь {Name}\nВыбери бафф, введи число от 1 до {count}");
+                ConsoleMessaging.ShowFightingMessage($"Сейчас очередь {Name}\nВыбери бафф, введи число от 1 до {count}");
                 _vvodChisla.Vvod(count);
                 int chislo = _vvodChisla.number;
                 buffs[chislo - 1].Activate(player1, player2);
