@@ -12,11 +12,10 @@ namespace PizdilovoGame
 
         static void Main(string[] args)             
         {
-            WorkWithFileLogic workWithFileLogic = new WorkWithFileLogic();
             WritingInfoInConsole writingInfoInConsole = new WritingInfoInConsole();
             PlayerCreator choosingRassaNameWeaponLogic = new PlayerCreator();
 
-            workWithFileLogic.CheckingAndCreatingDirectory();
+            WorkWithFileLogic.CheckingAndCreatingDirectory();
             try
             {
                 Console.WriteLine("Добро пожаловать в игру");
@@ -28,12 +27,9 @@ namespace PizdilovoGame
                 VvodChisla vvodChisla = new VvodChisla();                
                 for (int i = 0; i < kolichestvo; i++)
                 {
-                    Console.WriteLine("Выберите персонажа \n Elf - 1 \n Ork -2 \n Human - 3");
-                    vvodChisla.Vvod(3);
-                    int personazh = vvodChisla.number;
-                    _players[i] = choosingRassaNameWeaponLogic.SozdaniePersonozha(personazh);
-                    _players[i].Equip(ChooseWeapon());
-
+                    var player = choosingRassaNameWeaponLogic.CreatingOrDownloadingPlayer();
+                    player.Equip(ChooseWeapon());
+                    _players[i] = player;
                     Console.Clear();
                 }
 
@@ -57,11 +53,15 @@ namespace PizdilovoGame
                     anotherChamp.Udar(currentChamp);
                 }
                 while (currentChamp.HP > 0 && anotherChamp.HP > 0);
+
+                SavingPlayers.Serealization(anotherChamp);
+                SavingPlayers.Serealization(currentChamp);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Произошло что-то непредвиденное и программа дальше работать не будет. Смотрите логи в папке {Environment.SpecialFolder.ApplicationData}");
-                workWithFileLogic.WritingFile(ex.Message, ex.StackTrace);
+                WorkWithFileLogic.WritingFile(ex.Message, ex.StackTrace);
+                
                 throw;
             }
          }
@@ -76,51 +76,49 @@ namespace PizdilovoGame
                 if (currentChamp.HP > anotherChamp.HP)
                 {
                     Console.WriteLine($"Выиграл {currentChamp} c {currentChamp.HP} хп");
-                    Environment.Exit(0);
                 }
                 else
                 {
                     Console.WriteLine($"Выиграл {anotherChamp} c {anotherChamp.HP} хп");
-                    Environment.Exit(0);
                 }
             }
         }
 
         public static IWeapon ChooseWeapon()
+        {
+            Console.WriteLine("Выберите оружие \n Axe - 1 \n Sword -2 \n Shield - 3");
+            VvodChisla vvodChisla = new VvodChisla();
+            vvodChisla.Vvod(3);
+
+            int personazh = vvodChisla.number;
+
+            IWeapon chosenWeapon;
+            switch (personazh)
             {
-                Console.WriteLine("Выберите оружие \n Axe - 1 \n Sword -2 \n Shield - 3");
-                VvodChisla vvodChisla = new VvodChisla();
-                vvodChisla.Vvod(3);
+                case 1:
+                    {
+                        chosenWeapon = new Axe();
+                        break;
+                    }
+                case 2:
+                    {
+                        chosenWeapon = new Sword();
+                        break;
+                    }
+                case 3:
+                    {
+                        chosenWeapon = new Shield();
+                        break;
+                    }
+                default:
+                    {
+                        chosenWeapon = null;
+                        break;
+                    }
 
-                int personazh = vvodChisla.number;
-
-                IWeapon chosenWeapon;
-                switch (personazh)
-                {
-                    case 1:
-                        {
-                            chosenWeapon = new Axe();
-                            break;
-                        }
-                    case 2:
-                        {
-                            chosenWeapon = new Sword();
-                            break;
-                        }
-                    case 3:
-                        {
-                            chosenWeapon = new Shield();
-                            break;
-                        }
-                    default:
-                        {
-                            chosenWeapon = null;
-                            break;
-                        }
-
-                }
-
-                return chosenWeapon;
             }
+
+            return chosenWeapon;
+        }
     }
 }

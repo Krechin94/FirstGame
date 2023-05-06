@@ -1,38 +1,62 @@
 ﻿using PizdilovoGame.Rassi;
 using System;
+using System.IO;
+using System.Text.Json;
+using System.Threading;
 
 namespace PizdilovoGame.GameLogic
 {
     internal class PlayerCreator
     {
-        public IPlayer SozdaniePersonozha(int nomer)
+        VvodChisla _vvodChisla = new VvodChisla();
+
+        public Player CreatingOrDownloadingPlayer()
         {
-            IPlayer rasa = null;
-            switch (nomer)
+            Player player = new Player();
+            Console.WriteLine("Введите имя");
+            string _name = Console.ReadLine();
+            if (File.Exists($"{WorkWithFileLogic.PathToGameSaveData}\\{_name}.json"))
             {
-                case 1:
-                    {
-                        rasa = new Elf();
-                        Console.WriteLine("Введите имя");
-                        rasa.Name = Console.ReadLine();
-                        break;
-                    }
-                case 2:
-                    {
-                        rasa = new Ork();
-                        Console.WriteLine("Введите имя");
-                        rasa.Name = Console.ReadLine();
-                        break;
-                    }
-                case 3:
-                    {
-                        rasa = new Human();
-                        Console.WriteLine("Введите имя");
-                        rasa.Name = Console.ReadLine();
-                        break;
-                    }
+                var textPerson = File.ReadAllText($"{WorkWithFileLogic.PathToGameSaveData}\\{_name}.json");
+                Player deserializedPerson = JsonSerializer.Deserialize<Player>(textPerson);
+
+                Console.WriteLine($"персонаж под ником {_name} загружается...");
+                Thread.Sleep(2000);
+
+                player = deserializedPerson;
+                player.HP = 100;
+                player.Mana = 0;
             }
-            return rasa;
+            else
+            {
+                Console.WriteLine("Выберите персонажа \n Elf - 1 \n Ork -2 \n Human - 3");
+                _vvodChisla.Vvod(3);
+                int _nomer = _vvodChisla.number;
+                {
+                    switch (_nomer)
+                    {
+                        case 1:
+                            {
+                                player = new Elf();
+                                player.Name = _name;
+                                break;
+                            }
+                        case 2:
+                            {
+                                player = new Ork();
+                                player.Name = _name;
+                                break;
+                            }
+                        case 3:
+                            {
+                                player = new Human();
+                                player.Name = _name;
+                                break;
+                            }
+                    }
+                }
+            }
+            return player;
         }
     }
 }
