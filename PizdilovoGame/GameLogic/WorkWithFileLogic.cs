@@ -5,10 +5,11 @@ namespace PizdilovoGame.GameLogic
 {
     internal class WorkWithFileLogic
     {
-        public static string pathToAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        public static string PathToGameData = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\PizdilovoGame";
+        public static string PathToGameSaveData = $"{PathToGameData}\\Saves";
         public static void WritingFile(string exceptionMessage, string placeOfException)
         {
-            using (var sw = new StreamWriter($"{pathToAppData}\\PizdilovoGame\\Log.txt", true))
+            using (var sw = new StreamWriter($"{PathToGameData}\\Log.txt", true))
             {
                 sw.WriteLine("ошибка нахуй");
                 sw.WriteLine(DateTime.Now);
@@ -18,13 +19,13 @@ namespace PizdilovoGame.GameLogic
 
         public static void CheckingAndCreatingDirectory()
         {
-            if (!Directory.Exists($"{pathToAppData}\\PizdilovoGame"))
+            if (!Directory.Exists($"{PathToGameData}"))
             {
-                Directory.CreateDirectory($"{pathToAppData}\\PizdilovoGame");
+                Directory.CreateDirectory($"{PathToGameData}");
             }
-            if (!Directory.Exists($"{pathToAppData}\\PizdilovoGame\\Saves"))
+            if (!Directory.Exists($"{PathToGameSaveData}"))
             {
-                Directory.CreateDirectory($"{pathToAppData}\\PizdilovoGame\\Saves");
+                Directory.CreateDirectory($"{PathToGameSaveData}");
             }
         }
     }
