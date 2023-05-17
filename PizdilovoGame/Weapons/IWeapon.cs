@@ -9,5 +9,9 @@ namespace PizdilovoGame.Weapons
         int Uron { get; } 
 
         int Cost { get; }
+
+        string Description { get; }
+
+        string Affiliation { get; }
     }
 }
