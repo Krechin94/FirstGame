@@ -1,5 +1,7 @@
 ﻿using PizdilovoGame.Rassi;
+using PizdilovoGame.Weapons;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading;
@@ -57,6 +59,31 @@ namespace PizdilovoGame.GameLogic
                 }
             }
             return player;
+        }
+
+        List<IWeapon> weapons = new List<IWeapon>
+        {
+            new BloodyAxe(),
+            new LeftHandElfSword(),
+            new RightHandElfSword(),
+            new TurtuleShield(),
+            new TurtuleSword(),
+        };
+
+        public void Equip(IWeapon weapon, List<IWeapon> weapons)
+        {
+            int i = 0;
+            Console.WriteLine("Выбери оружие которое хочешь надеть");
+            foreach (IWeapon oruzhie in weapons)
+            {
+                Console.SetCursorPosition(0, 1 + i);
+                Console.WriteLine($"{i+1} - {oruzhie.Name} : {oruzhie.Description}");
+            }
+            int count = weapons.Count;
+            Console.WriteLine($"Vvedi Chislo ot 1 do {count}");
+            _vvodChisla.Vvod(count);
+            int chislo = _vvodChisla.number;
+            weapons[chislo - 1] = weapon;
         }
     }
 }

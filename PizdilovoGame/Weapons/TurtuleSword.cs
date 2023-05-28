@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PizdilovoGame.Rassi;
 
 namespace PizdilovoGame.Weapons
 {
@@ -16,5 +12,15 @@ namespace PizdilovoGame.Weapons
         public int Cost { get; } = 1;
 
         public string Affiliation { get; set; } = "Ork";
+
+        public void Equip(IPlayer player)
+        {
+            player.Uron += Uron;
+            if (player.Nation == Affiliation)
+            {
+                player.HP += 10;
+                player.ChancetoBlock += 3;
+            }
+        }
     }
 }

@@ -11,7 +11,8 @@ namespace PizdilovoGame
 {
     public class Player : IPlayer
     {
-        private IWeapon _currentWeapon;
+        private IWeapon _currentWeapon1;
+        private IWeapon _currentWeapon2;
         private int _hp;
         private int _stamina;
         private readonly Random _random = new Random();
@@ -48,7 +49,10 @@ namespace PizdilovoGame
                 HpAndManaChanged?.Invoke();
             }
         }
-
+        public int Uron { get; set; } = 0;
+        public int ChanceToBlock { get; set; } = 0;
+        public int ChanceToKrit { get; set; } = 0;
+        public int ChanceToDodge { get; set; } = 0;
         public string Name { get; set; }
         public string Nation { get; set; }
 
@@ -60,6 +64,15 @@ namespace PizdilovoGame
             new SpitIntoTheFace(),
             new WetWilly(),
         };
+
+        /*List<IWeapon> weapons = new List<IWeapon>
+        {
+            new BloodyAxe(),
+            new LeftHandElfSword(),
+            new RightHandElfSword(),
+            new TurtuleShield(),
+            new TurtuleSword(),
+        };*/
 
         public void Udar(IPlayer enemy)
         {
@@ -99,11 +112,6 @@ namespace PizdilovoGame
                 }
 
                 ProverkaNaCombo(kuda);
-        }
-
-        public void Equip(IWeapon weapon)
-        {
-            _currentWeapon = weapon;
         }
 
         public override string ToString()

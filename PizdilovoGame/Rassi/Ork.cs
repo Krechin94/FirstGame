@@ -9,6 +9,7 @@ namespace PizdilovoGame.Rassi
             HP = 100;
             Mana = 0;
             Nation = "Ork";
+            ChanceToBlock = 3;
         }
     }
 }

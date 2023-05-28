@@ -28,7 +28,7 @@ namespace PizdilovoGame
                 for (int i = 0; i < kolichestvo; i++)
                 {
                     var player = choosingRassaNameWeaponLogic.CreatingOrDownloadingPlayer();
-                    player.Equip(ChooseWeapon());
+                    //player.Equip(ChooseWeapon());
                     _players[i] = player;
                     Console.Clear();
                 }
@@ -84,7 +84,7 @@ namespace PizdilovoGame
             }
         }
 
-        public static IWeapon ChooseWeapon()
+       /* public static IWeapon ChooseWeapon()
         {
             Console.WriteLine("Выберите оружие \n Axe - 1 \n Sword -2 \n Shield - 3");
             VvodChisla vvodChisla = new VvodChisla();
@@ -119,6 +119,6 @@ namespace PizdilovoGame
             }
 
             return chosenWeapon;
-        }
+        }*/
     }
 }
