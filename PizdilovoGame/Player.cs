@@ -32,8 +32,8 @@ namespace PizdilovoGame
             }
         }
 
-        public int Mana 
-        { 
+        public int Mana
+        {
             get => _stamina;
             set
             {
@@ -76,42 +76,46 @@ namespace PizdilovoGame
 
         public void Udar(IPlayer enemy)
         {
-                List<IBuffs> list = ChekingBuffsForYou(allBuffsOfPlayers, this, enemy);
-                Console.SetCursorPosition(0, 3);
-                ViborBuffs(list, this, enemy);
-                Console.WriteLine($"Сейчас бьет {Name}");
-                Console.WriteLine("Куда бить 1 - голова, 2 - туловище, 3 - ноги");
-                _vvodChisla.Vvod(3);
-                Console.Clear();
-                var kuda = _vvodChisla.number;
-                switch (kuda)
-                {
-                    case 1:
-                        {
-                            int a = _random.Next(1, 10);
-                            enemy.HP = enemy.HP - a;
-                            this.Mana++;
-                            Console.WriteLine($" ты наносишь {a} урона");
-                            break;
-                        }
-                    case 2:
-                        {
-                            int b = _random.Next(3, 6);
-                            enemy.HP = enemy.HP - b;
-                            this.Mana++;
-                            Console.WriteLine($" ты наносишь {b} урона");
-                            break;
-                        }
-                    case 3:
-                        {
-                            enemy.HP = enemy.HP - 4;
-                            this.Mana++;
-                            Console.WriteLine($" ты наносишь 4 урона");
-                            break;
-                        }
-                }
+            List<IBuffs> list = ChekingBuffsForYou(allBuffsOfPlayers, this, enemy);
+            Console.SetCursorPosition(0, 3);
+            ViborBuffs(list, this, enemy);
+            Console.WriteLine($"Сейчас бьет {Name}");
+            Console.WriteLine("Куда бить 1 - голова, 2 - туловище, 3 - ноги");
+            _vvodChisla.Vvod(3);
+            Console.Clear();
+            var kuda = _vvodChisla.number;
+            switch (kuda)
+            {
+                case 1:
+                    {
+                        int a = _random.Next(1, 10);
+                        a += this.Uron;
+                        KritBlockDodge(this, a);
+                        enemy.HP = enemy.HP - a;
+                        this.Mana++;
+                        Console.WriteLine($" ты наносишь {a} урона");
+                        break;
+                    }
+                case 2:
+                    {
+                        int b = _random.Next(3, 6);
+                        b += this.Uron;
 
-                ProverkaNaCombo(kuda);
+                        enemy.HP = enemy.HP - b;
+                        this.Mana++;
+                        Console.WriteLine($" ты наносишь {b} урона");
+                        break;
+                    }
+                case 3:
+                    {
+                        enemy.HP = enemy.HP - 4;
+                        this.Mana++;
+                        Console.WriteLine($" ты наносишь 4 урона");
+                        break;
+                    }
+            }
+
+            ProverkaNaCombo(kuda);
         }
 
         public override string ToString()
@@ -145,9 +149,9 @@ namespace PizdilovoGame
             {
                 if (player1.Mana >= buff.Cost)
                 {
-                    if (player1.Nation == buff.Affiliations || buff.Affiliations =="All")
+                    if (player1.Nation == buff.Affiliations || buff.Affiliations == "All")
                     {
-                        string text = $"Заклинание номер - {i+1} {buff.Name}\n";
+                        string text = $"Заклинание номер - {i + 1} {buff.Name}\n";
                         Console.SetCursorPosition((Console.WindowWidth) - text.Length, 4 + i);
                         Console.WriteLine(text);
                         list.Add(buff);
@@ -169,6 +173,32 @@ namespace PizdilovoGame
                 buffs[chislo - 1].Activate(player1, player2);
                 Console.Clear();
             }
+        }
+
+        private int KritBlockDodge(IPlayer player1, int udar)
+        {
+            int _kritNumber = _random.Next(player1.ChanceToKrit, 15);
+            int _dodgeNumber = _random.Next(player1.ChanceToDodge, 15);
+            int _blockNumber = _random.Next(player1.ChanceToBlock, 15);
+            if(_blockNumber == 15)
+            {
+                udar = 0;
+                Console.SetCursorPosition(0, 9);
+                Console.WriteLine("Тебя заблокировали");
+            }
+            if (_kritNumber == 15)
+            {
+                udar *= 2;
+                Console.SetCursorPosition(0, 9);
+                Console.WriteLine("О ебать крит");
+            }
+            if (_dodgeNumber == 15)
+            {
+                udar = 0;
+                Console.SetCursorPosition(0, 9);
+                Console.WriteLine("От тебя увернулись");
+            }
+            return udar;
         }
     }
 }

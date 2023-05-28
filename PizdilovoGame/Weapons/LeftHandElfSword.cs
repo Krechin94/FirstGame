@@ -19,7 +19,7 @@ namespace PizdilovoGame.Weapons
             if (player.Nation == Affiliation)
             {
                 player.HP += 3;
-                player.ChancetoBlock += 2;
+                player.ChanceToDodge += 2;
             }
         }
     }

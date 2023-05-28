@@ -20,7 +20,7 @@ namespace PizdilovoGame.Weapons
             {
                 player.HP += 10;
 
-                player.ChancetoBlock += 2;
+                player.ChanceToBlock += 2;
             }
         }
     }
