@@ -2,7 +2,6 @@
 using PizdilovoGame.Rassi;
 using System;
 using PizdilovoGame.GameLogic;
-using System.Threading;
 
 namespace PizdilovoGame
 {
@@ -20,7 +19,7 @@ namespace PizdilovoGame
             workWithFileLogic.CheckingAndCreatingDirectory();
             try
             {
-                ConsoleMessaging.ShowGameInfoCursor00("Добро пожаловать в игру\nСуть игры дать другому по ебалу");
+                ConsoleMessaging.ShowGameInfoCursor00("Добро пожаловать в игру!!! Суть игры дать другому по ебалу");
 
                 int kolichestvo;
                 kolichestvo = 2;
@@ -28,13 +27,11 @@ namespace PizdilovoGame
                 VvodChisla vvodChisla = new VvodChisla();                
                 for (int i = 0; i < kolichestvo; i++)
                 {
-                    ConsoleMessaging.ShowGameInfoCursor00("Выберите персонажа \n Elf - 1 \n Ork -2 \n Human - 3");
+                    ConsoleMessaging.ShowFightingMessage("Выберите персонажа \n Elf - 1 \n Ork -2 \n Human - 3");
                     vvodChisla.Vvod(3);
                     int personazh = vvodChisla.number;
                     _players[i] = choosingRassaNameWeaponLogic.SozdaniePersonozha(personazh);
-                    _players[i].Equip(ChooseWeapon());
-
-                    Console.Clear();
+                    ConsoleMessaging.ConsoleClear();
                 }
 
                 var playerManager = new PlayerInfoManager(_players[0], _players[1]);
@@ -84,42 +81,5 @@ namespace PizdilovoGame
                 }
             }
         }
-
-        public static IWeapon ChooseWeapon()
-            {
-                ConsoleMessaging.ShowGameInfoCursor00("Выберите оружие \n Axe - 1 \n Sword -2 \n Shield - 3");
-                VvodChisla vvodChisla = new VvodChisla();
-                vvodChisla.Vvod(3);
-
-                int personazh = vvodChisla.number;
-
-                IWeapon chosenWeapon;
-                switch (personazh)
-                {
-                    case 1:
-                        {
-                            chosenWeapon = new Axe();
-                            break;
-                        }
-                    case 2:
-                        {
-                            chosenWeapon = new Sword();
-                            break;
-                        }
-                    case 3:
-                        {
-                            chosenWeapon = new Shield();
-                            break;
-                        }
-                    default:
-                        {
-                            chosenWeapon = null;
-                            break;
-                        }
-
-                }
-
-                return chosenWeapon;
-            }
     }
 }

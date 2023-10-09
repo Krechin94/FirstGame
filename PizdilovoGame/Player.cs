@@ -163,7 +163,7 @@ namespace PizdilovoGame
                 _vvodChisla.Vvod(count);
                 int chislo = _vvodChisla.number;
                 buffs[chislo - 1].Activate(player1, player2);
-                Console.Clear();
+                ConsoleMessaging.ConsoleClear();
             }
         }
     }

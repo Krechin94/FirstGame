@@ -19,9 +19,10 @@ namespace PizdilovoGame.GameLogic
 
         public static void StartFightingMessage(string message)
         {
+            ConsoleClear();
             Console.WriteLine(message);
             Thread.Sleep(1000);
-            Console.Clear();
+            ConsoleClear();
         }
 
         public static void ShowFightingMessage(string message)
