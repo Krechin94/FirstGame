@@ -76,7 +76,7 @@ namespace PizdilovoGame
                         int a = _random.Next(1, 10);
                         enemy.HP = enemy.HP - a;
                         this.Mana++;
-                        ConsoleMessaging.ShowGameInfoCursor00($" ты наносишь {a} урона");
+                        ConsoleMessaging.PunchInfo(a);
                         break;
                     }
                 case 2:
@@ -84,14 +84,14 @@ namespace PizdilovoGame
                         int b = _random.Next(3, 6);
                         enemy.HP = enemy.HP - b;
                         this.Mana++;
-                        ConsoleMessaging.ShowGameInfoCursor00($" ты наносишь {b} урона");
+                        ConsoleMessaging.PunchInfo(b);
                         break;
                     }
                 case 3:
                     {
                         enemy.HP = enemy.HP - 4;
                         this.Mana++;
-                        ConsoleMessaging.ShowGameInfoCursor00($" ты наносишь {4} урона");
+                        ConsoleMessaging.PunchInfo(4);
                         break;
                     }
             }

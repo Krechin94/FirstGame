@@ -7,6 +7,8 @@ namespace PizdilovoGame.GameLogic
 {
     internal static class ConsoleMessaging
     {
+
+        static Random random = new Random();
         public static void ShowBuffMessage(string message, int i)
         {
             ShowMessage(message, (Console.WindowWidth) - message.Length, 4 + i);
@@ -15,6 +17,20 @@ namespace PizdilovoGame.GameLogic
         public static void ConsoleClear()
         {
             Console.Clear();    
+        }
+        
+        public static void PunchInfo(int uron)
+        {
+
+            string[] _phrases = {
+                $"Ты наносишь {uron} урона",
+                $"Сильно размахнувщись ты нанёс {uron} урона",
+                $"У противника не получилось увернуться и ты нанёс {uron} урона",
+                $"Сделав сальто ты попал по противнику и нанёс {uron} урона",
+                $"Хуякс-Хуякс {uron} урона"
+            };
+            int _phraseNumber = random.Next(0,4);
+            ShowMessage(_phrases[_phraseNumber], 0, 0);
         }
 
         public static void StartFightingMessage(string message)
