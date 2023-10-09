@@ -29,9 +29,9 @@ namespace PizdilovoGame.GameLogic
             ShowMessage(message, 0, 1);
         }
 
-        public static void ShowMessageCursor00(string message)
+        public static void ShowGameInfoCursor00(string message)
         {
-            Console.WriteLine(message);
+            ShowMessage(message, 0, 0);
         }
 
         public static void ShowMessage(string message,int _xCoordinate=0, int _yCoordinate=0 )

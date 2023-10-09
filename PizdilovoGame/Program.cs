@@ -20,7 +20,7 @@ namespace PizdilovoGame
             workWithFileLogic.CheckingAndCreatingDirectory();
             try
             {
-                ConsoleMessaging.ShowMessageCursor00("Добро пожаловать в игру\nСуть игры дать другому по ебалу");
+                ConsoleMessaging.ShowGameInfoCursor00("Добро пожаловать в игру\nСуть игры дать другому по ебалу");
 
                 int kolichestvo;
                 kolichestvo = 2;
@@ -28,7 +28,7 @@ namespace PizdilovoGame
                 VvodChisla vvodChisla = new VvodChisla();                
                 for (int i = 0; i < kolichestvo; i++)
                 {
-                    ConsoleMessaging.ShowMessageCursor00("Выберите персонажа \n Elf - 1 \n Ork -2 \n Human - 3");
+                    ConsoleMessaging.ShowGameInfoCursor00("Выберите персонажа \n Elf - 1 \n Ork -2 \n Human - 3");
                     vvodChisla.Vvod(3);
                     int personazh = vvodChisla.number;
                     _players[i] = choosingRassaNameWeaponLogic.SozdaniePersonozha(personazh);
@@ -59,7 +59,7 @@ namespace PizdilovoGame
             }
             catch (Exception ex)
             {
-                ConsoleMessaging.ShowMessageCursor00($"Произошло что-то непредвиденное и программа дальше работать не будет. Смотрите логи в папке {Environment.SpecialFolder.ApplicationData}");
+                ConsoleMessaging.ShowGameInfoCursor00($"Произошло что-то непредвиденное и программа дальше работать не будет. Смотрите логи в папке {Environment.SpecialFolder.ApplicationData}");
                 workWithFileLogic.WritingFile(ex.Message, ex.StackTrace);
                 throw;
             }
@@ -74,12 +74,12 @@ namespace PizdilovoGame
             {
                 if (currentChamp.HP > anotherChamp.HP)
                 {
-                    ConsoleMessaging.ShowMessageCursor00($"Выиграл {currentChamp} c {currentChamp.HP} хп");
+                    ConsoleMessaging.ShowGameInfoCursor00($"Выиграл {currentChamp} c {currentChamp.HP} хп");
                     Environment.Exit(0);
                 }
                 else
                 {
-                    ConsoleMessaging.ShowMessageCursor00($"Выиграл {anotherChamp} c {anotherChamp.HP} хп");
+                    ConsoleMessaging.ShowGameInfoCursor00($"Выиграл {anotherChamp} c {anotherChamp.HP} хп");
                     Environment.Exit(0);
                 }
             }
@@ -87,7 +87,7 @@ namespace PizdilovoGame
 
         public static IWeapon ChooseWeapon()
             {
-                ConsoleMessaging.ShowMessageCursor00("Выберите оружие \n Axe - 1 \n Sword -2 \n Shield - 3");
+                ConsoleMessaging.ShowGameInfoCursor00("Выберите оружие \n Axe - 1 \n Sword -2 \n Shield - 3");
                 VvodChisla vvodChisla = new VvodChisla();
                 vvodChisla.Vvod(3);
 
