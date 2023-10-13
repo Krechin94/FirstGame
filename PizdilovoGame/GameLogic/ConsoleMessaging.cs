@@ -46,14 +46,14 @@ namespace PizdilovoGame.GameLogic
             ShowMessage(message, 0, 1);
         }
 
-        public static void ShowGameInfoCursor00(string message)
+        public static void ShowGameInfoCursor(string message)
         {
             ShowMessage(message, 0, 0);
         }
 
-        public static void ShowMessage(string message,int _xCoordinate=0, int _yCoordinate=0 )
+        public static void ShowMessage(string message,int xCoordinate=0, int yCoordinate=0 )
         {
-            Console.SetCursorPosition(_xCoordinate, _yCoordinate);
+            Console.SetCursorPosition(xCoordinate, yCoordinate);
             Console.WriteLine(message);
         }
 

@@ -19,7 +19,7 @@ namespace PizdilovoGame
             workWithFileLogic.CheckingAndCreatingDirectory();
             try
             {
-                ConsoleMessaging.ShowGameInfoCursor00("Добро пожаловать в игру!!! Суть игры дать другому по ебалу");
+                ConsoleMessaging.ShowGameInfoCursor("Добро пожаловать в игру!!! Суть игры дать другому по ебалу");
 
                 int kolichestvo;
                 kolichestvo = 2;
@@ -56,7 +56,7 @@ namespace PizdilovoGame
             }
             catch (Exception ex)
             {
-                ConsoleMessaging.ShowGameInfoCursor00($"Произошло что-то непредвиденное и программа дальше работать не будет. Смотрите логи в папке {Environment.SpecialFolder.ApplicationData}");
+                ConsoleMessaging.ShowGameInfoCursor($"Произошло что-то непредвиденное и программа дальше работать не будет. Смотрите логи в папке {Environment.SpecialFolder.ApplicationData}");
                 workWithFileLogic.WritingFile(ex.Message, ex.StackTrace);
                 throw;
             }
@@ -71,12 +71,12 @@ namespace PizdilovoGame
             {
                 if (currentChamp.HP > anotherChamp.HP)
                 {
-                    ConsoleMessaging.ShowGameInfoCursor00($"Выиграл {currentChamp} c {currentChamp.HP} хп");
+                    ConsoleMessaging.ShowGameInfoCursor($"Выиграл {currentChamp} c {currentChamp.HP} хп");
                     Environment.Exit(0);
                 }
                 else
                 {
-                    ConsoleMessaging.ShowGameInfoCursor00($"Выиграл {anotherChamp} c {anotherChamp.HP} хп");
+                    ConsoleMessaging.ShowGameInfoCursor($"Выиграл {anotherChamp} c {anotherChamp.HP} хп");
                     Environment.Exit(0);
                 }
             }

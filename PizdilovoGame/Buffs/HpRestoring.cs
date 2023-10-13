@@ -8,7 +8,7 @@ namespace PizdilovoGame.Buffs
         public int Cost { get; } = 3;
 
         public string Affiliations { get; } = "All";
-        public string Description { get; } = "Заклинание по восстановлению хп. Восстанавливает 10 хп. Стоит 3 аны";
+        public string Description { get; } = "Заклинание по восстановлению хп. Восстанавливает 10 хп. Стоит 3 маны";
 
         public void Activate(IPlayer player1, IPlayer player2)
         {
